@@ -10,16 +10,26 @@
                             <h2 class="">ثبت نام</h2>
                             <!-- Form START -->
                             <form wire:submit="registerUser">
-                                <!-- Email -->
+
+                                <div class="mb-4">
+                                    <label for="exampleInputEmail1" class="form-label">نام و نام خانوادگی</label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="bi bi-envelope-fill"></i></span>
+                                        <input wire:model="name" type="text" class="form-control border-0 bg-light rounded-end ps-1" id="exampleInputEmail1">
+                                    </div>
+                                    @error('name')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </div>
                                 <div class="mb-4">
                                     <label for="exampleInputEmail1" class="form-label">ایمیل</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="bi bi-envelope-fill"></i></span>
                                         <input wire:model="email" type="email" class="form-control border-0 bg-light rounded-end ps-1" placeholder="***@gmail.com" id="exampleInputEmail1">
-                                        @error('email')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
                                     </div>
+                                    @error('email')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </div>
                                 <!-- Password -->
                                 <div class="mb-4">
@@ -27,10 +37,10 @@
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fas fa-lock"></i></span>
                                         <input wire:model="password" type="password" class="form-control border-0 bg-light rounded-end ps-1" placeholder="*********" id="inputPassword5">
-                                        @error('password')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
                                     </div>
+                                    @error('password')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </div>
                                 <!-- Confirm Password -->
                                 <div class="mb-4">
