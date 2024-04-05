@@ -14,4 +14,18 @@ Route::group(['middleware' => ['guest']], function () {
 
     // forget password
     Route::get('forget_password',\Modules\Auth\Livewire\ForgetPassword::class)->name('forget-password');
+
+
+    Route::get('reset-password/{token}', \Modules\Auth\Livewire\ResetPassword::class)
+        ->name('password.reset');
+
 });
+
+// Email Verification
+
+Route::get('verify-email', \Modules\Auth\Livewire\EmailVerification::class)
+    ->name('verification.notice');
+
+Route::get('verify-email/{id}/{hash}', [\Modules\Auth\Http\Controllers\VerifyEmailController::class,'verify'])
+    ->middleware(['signed', 'throttle:6,1'])
+    ->name('verification.verify');
