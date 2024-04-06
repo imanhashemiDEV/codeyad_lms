@@ -2,13 +2,13 @@
 
 namespace Modules\Auth\Livewire;
 
-use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Modules\Auth\Models\User;
 
 class Register extends Component
 {
@@ -31,8 +31,7 @@ class Register extends Component
         ]);
 
         Auth::login($user);
-        event(new Registered($user));
-        return redirect()->route('verification.notice');
+
     }
     #[Layout('auth::layouts.app')]
     public function render()

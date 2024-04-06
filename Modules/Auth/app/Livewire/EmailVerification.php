@@ -7,11 +7,6 @@ use Livewire\Component;
 
 class EmailVerification extends Component
 {
-    public function resend()
-    {
-        auth()->user()->sendEmailVerificationNotification();
-        session()->flash('message','hhhh');
-    }
     #[Layout('auth::layouts.app')]
     public function render()
     {

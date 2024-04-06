@@ -2,12 +2,11 @@
 
 namespace Modules\Auth\Livewire;
 
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Modules\Auth\Models\User;
 
 class Login extends Component
 {
