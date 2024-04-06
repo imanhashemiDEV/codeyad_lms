@@ -21,6 +21,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Email Verification
      Route::get('verify-email',\Modules\Auth\Livewire\EmailVerification::class)->name('verification.send');
+
+    Route::get('verify-email/{id}/{hash}',[\Modules\Auth\Http\Controllers\VerifyEmailController::class,'verify'])
+        ->name('verification.verify');
+
+
 });
 
 

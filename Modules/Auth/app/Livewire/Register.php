@@ -31,6 +31,8 @@ class Register extends Component
         ]);
 
         Auth::login($user);
+        event(new Registered($user));
+        return redirect()->route('verification.send');
 
     }
     #[Layout('auth::layouts.app')]
