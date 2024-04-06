@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
      Route::get('verify-email',\Modules\Auth\Livewire\EmailVerification::class)->name('verification.send');
 
     Route::get('verify-email/{id}/{hash}',[\Modules\Auth\Http\Controllers\VerifyEmailController::class,'verify'])
+        ->middleware(['signed','throttle:6,1'])
         ->name('verification.verify');
 
 
