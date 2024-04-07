@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 
 <head>
-    <title>login</title>
+    <title>{{$title??'خانه'}}</title>
 
     <!-- Meta Tags -->
     <meta charset="utf-8">

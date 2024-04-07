@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Modules\Auth\Models\User;
 
@@ -35,7 +36,7 @@ class Register extends Component
         return redirect()->route('verification.send');
 
     }
-    #[Layout('auth::layouts.app')]
+    #[Layout('auth::layouts.app'),Title('ثبت نام')]
     public function render()
     {
         return view('auth::livewire.register');
