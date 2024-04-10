@@ -4,6 +4,11 @@
         <div class="container-fluid">
             <div class="row mt-6">
                 <div class="col-6 m-auto">
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            <p>{{session('message')}}</p>
+                        </div>
+                    @endif
                     <div class="row my-5">
                         <div class="col-sm-10 col-xl-8 m-auto">
                             <!-- Title -->
