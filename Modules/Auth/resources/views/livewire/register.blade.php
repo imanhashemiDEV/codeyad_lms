@@ -12,10 +12,10 @@
                             <form wire:submit="registerUser">
 
                                 <div class="mb-4">
-                                    <label for="exampleInputEmail1" class="form-label">نام و نام خانوادگی</label>
+                                    <label for="name" class="form-label">نام و نام خانوادگی</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="bi bi-envelope-fill"></i></span>
-                                        <input wire:model="name" type="text" class="form-control border-0 bg-light rounded-end ps-1" id="exampleInputEmail1">
+                                        <input wire:model="name" type="text" class="form-control border-0 bg-light rounded-end ps-1" id="name">
                                     </div>
                                     @error('name')
                                     <p class="text-danger">{{$message}}</p>

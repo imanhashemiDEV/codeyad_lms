@@ -2,15 +2,18 @@
 <html lang="fa" dir="rtl">
 
 <head>
-    <title>login</title>
+    <title> دوره آنلاین و آموزش</title>
 
     <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="">
+    <meta name="description" content="پنل مدیریت">
+
     <!-- Dark mode -->
     <script>
         const storedTheme = localStorage.getItem('theme')
+
         const getPreferredTheme = () => {
             if (storedTheme) {
                 return storedTheme
@@ -66,19 +69,45 @@
         })
 
     </script>
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{url('assets/images/favicon.ico')}}">
+
     <!-- Plugins CSS -->
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/font-awesome/css/all.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/apexcharts/css/apexcharts.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css')}}">
+
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{url('assets/css/style-rtl.css')}}">
+
 </head>
 
 <body>
 
+
 <!-- **************** MAIN CONTENT START **************** -->
-{{$slot}}
+<main>
+
+    <!-- Sidebar START -->
+    @include('panel::layouts.sidebar')
+    <!-- Sidebar END -->
+
+    <!-- Page content START -->
+    <div class="page-content">
+
+        <!-- Top bar START -->
+        @include('panel::layouts.navbar')
+        <!-- Top bar END -->
+
+        <!-- Page main content START -->
+        {{$slot}}
+        <!-- Page main content END -->
+    </div>
+    <!-- Page content END -->
+
+</main>
 <!-- **************** MAIN CONTENT END **************** -->
 
 <!-- Back to top -->
@@ -87,8 +116,14 @@
 <!-- Bootstrap JS -->
 <script src="{{url('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 
+<!-- Vendors -->
+<script src="{{url('assets/vendor/purecounterjs/dist/purecounter_vanilla.js')}}"></script>
+<script src="{{url('assets/vendor/apexcharts/js/apexcharts.min.js')}}"></script>
+<script src="{{url('assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js')}}"></script>
+
 <!-- Template Functions -->
 <script src="{{url('assets/js/functions.js')}}"></script>
+
 
 </body>
 

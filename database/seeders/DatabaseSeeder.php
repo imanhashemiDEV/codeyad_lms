@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Auth\Models\User;
+use Modules\User\app\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 

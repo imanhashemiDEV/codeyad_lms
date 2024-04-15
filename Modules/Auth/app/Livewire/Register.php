@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Modules\Auth\Models\User;
+use Modules\User\app\Models\User;
 
 class Register extends Component
 {

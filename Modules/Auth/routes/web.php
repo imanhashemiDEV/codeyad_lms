@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Http\Controllers\AuthController;
 
@@ -28,6 +29,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('verify-email/{id}/{hash}',[\Modules\Auth\Http\Controllers\VerifyEmailController::class,'verify'])
         ->middleware(['signed','throttle:6,1'])
         ->name('verification.verify');
+
+    Route::get('logout',function (){
+        Auth::logout();
+    })->name('logout');
 
 
 });
