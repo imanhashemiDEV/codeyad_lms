@@ -14,6 +14,6 @@ use Modules\Category\Http\Controllers\CategoryController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('category', CategoryController::class)->names('category');
+Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+    Route::get('categories', \Modules\Category\Livewire\Categories::class)->name('panel.categories');
 });

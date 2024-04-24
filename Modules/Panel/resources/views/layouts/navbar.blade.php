@@ -4,9 +4,9 @@
 
             <!-- Logo START -->
             <div class="d-flex align-items-center d-xl-none">
-                <a class="navbar-brand" href="index.html">
-                    <img class="light-mode-item navbar-brand-item h-30px" src="assets/images/logo-mobile.svg" alt="">
-                    <img class="dark-mode-item navbar-brand-item h-30px" src="assets/images/logo-mobile-light.svg" alt="">
+                <a class="navbar-brand" href="{{route('panel.index')}}">
+                    <img class="light-mode-item navbar-brand-item h-30px" src="{{url('assets/images/logo-mobile.svg')}}" alt="">
+                    <img class="dark-mode-item navbar-brand-item h-30px" src="{{url('assets/images/logo-mobile-light.svg')}}" alt="">
                 </a>
             </div>
             <!-- Logo END -->
@@ -51,7 +51,7 @@
                                             <a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
                                                 <div class="me-3">
                                                     <div class="avatar avatar-md">
-                                                        <img class="avatar-img rounded-circle" src="assets/images/avatar/08.jpg" alt="avatar">
+                                                        <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/08.jpg')}}" alt="avatar">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -66,7 +66,7 @@
                                             <a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
                                                 <div class="me-3">
                                                     <div class="avatar avatar-md">
-                                                        <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg" alt="avatar">
+                                                        <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/02.jpg')}}" alt="avatar">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -82,7 +82,7 @@
                                             <a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
                                                 <div class="me-3">
                                                     <div class="avatar avatar-md">
-                                                        <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
+                                                        <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/05.jpg')}}" alt="avatar">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -97,7 +97,7 @@
                                             <a href="#" class="list-group-item-action border-0 border-bottom d-flex p-3">
                                                 <div class="me-3">
                                                     <div class="avatar avatar-md">
-                                                        <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="avatar">
+                                                        <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/03.jpg')}}" alt="avatar">
                                                     </div>
                                                 </div>
                                                 <div>
@@ -123,7 +123,7 @@
                     <li class="nav-item ms-3 dropdown">
                         <!-- Avatar -->
                         <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
+                            <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/01.jpg')}}" alt="avatar">
                         </a>
 
                         <!-- Profile dropdown START -->
@@ -133,10 +133,10 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Avatar -->
                                     <div class="avatar me-3">
-                                        <img class="avatar-img rounded-circle shadow" src="assets/images/avatar/01.jpg" alt="avatar">
+                                        <img class="avatar-img rounded-circle shadow" src="{{url('assets/images/avatar/01.jpg')}}" alt="avatar">
                                     </div>
                                     <div>
-                                        <a class="h6" href="#">الهام حسینی</a>
+                                        <a class="h6" href="#">سید ایمان هاشمی</a>
                                         <p class="small m-0">example@gmail.com</p>
                                     </div>
                                 </div>

@@ -2,8 +2,8 @@
 
     <!-- Navbar brand for xl START -->
     <div class="d-flex align-items-center">
-        <a class="navbar-brand" href="index.html">
-            <img class="navbar-brand-item" src="assets/images/logo-light.svg" alt="">
+        <a class="navbar-brand" href="{{route('panel.index')}}">
+            <img class="navbar-brand-item" src="{{url('assets/images/logo-mobile.svg')}}" alt="">
         </a>
     </div>
     <!-- Navbar brand for xl END -->
@@ -14,8 +14,15 @@
             <!-- Sidebar menu START -->
             <ul class="navbar-nav flex-column" id="navbar-sidebar">
 
-                <!-- Menu item 1 -->
-                <li class="nav-item"><a href="admin-dashboard.html" class="nav-link active"><i class="bi bi-house fa-fw me-2"></i>داشبورد</a></li>
+                <!-- Menu item -->
+                <li class="nav-item">
+                    <a href="{{route('panel.index')}}" class="nav-link active">
+                        <i class="bi bi-house fa-fw me-2"></i>داشبورد</a>
+                </li>
+                <li class="nav-item">
+                    <a  href="{{route('panel.categories')}}" class="nav-link active">
+                        <i class="bi bi-basket fa-fw me-2"></i>دسته بندی</a>
+                </li>
 
             </ul>
             <!-- Sidebar menu end -->
@@ -23,13 +30,13 @@
             <!-- Sidebar footer START -->
             <div class="px-3 mt-auto pt-3">
                 <div class="d-flex align-items-center justify-content-between text-primary-hover">
-                    <a class="h5 mb-0 text-body" href="admin-setting.html" data-bs-toggle="tooltip" data-bs-placement="top" title="تنظیمات">
+                    <a class="h5 mb-0 text-body" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="تنظیمات">
                         <i class="bi bi-gear-fill"></i>
                     </a>
-                    <a class="h5 mb-0 text-body" href="index.html" data-bs-toggle="tooltip" data-bs-placement="top" title="صفحه اصلی">
+                    <a class="h5 mb-0 text-body" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="صفحه اصلی">
                         <i class="bi bi-globe"></i>
                     </a>
-                    <a class="h5 mb-0 text-body" href="sign-in.html" data-bs-toggle="tooltip" data-bs-placement="top" title="خروج">
+                    <a class="h5 mb-0 text-body" href="{{route('logout')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="خروج">
                         <i class="bi bi-power"></i>
                     </a>
                 </div>
