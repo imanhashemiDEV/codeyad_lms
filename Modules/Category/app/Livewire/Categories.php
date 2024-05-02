@@ -14,7 +14,7 @@ class Categories extends Component
 
     public $parent_id=0;
     public $title;
-
+    protected $paginationTheme = 'bootstrap';
 
 
     public function createCategory()
