@@ -78,10 +78,11 @@
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/apexcharts/css/apexcharts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('assets/vendor/sweet_alert/sweetalert2.min.css')}}">
 
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{url('assets/css/style-rtl.css')}}">
-
+    @stack('styles')
 </head>
 
 <body>
@@ -120,10 +121,11 @@
 <script src="{{url('assets/vendor/purecounterjs/dist/purecounter_vanilla.js')}}"></script>
 <script src="{{url('assets/vendor/apexcharts/js/apexcharts.min.js')}}"></script>
 <script src="{{url('assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js')}}"></script>
+<script src="{{url('assets/vendor/sweet_alert/sweetalert2.all.min.js')}}"></script>
 
 <!-- Template Functions -->
 <script src="{{url('assets/js/functions.js')}}"></script>
-
+@stack('scripts')
 
 </body>
 
