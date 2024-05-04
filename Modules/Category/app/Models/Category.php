@@ -29,8 +29,16 @@ class Category extends Model
       return $this->hasMany(self::class,'parent_id','id');
     }
 
-    protected static function newFactory(): CategoryFactory
+    protected static function boot()
     {
-        //return CategoryFactory::new();
+        parent::boot();
+        self::deleting(function ($category) {
+            foreach($category->child()->get() as $child){
+                $child->update([
+                    'parent_id' => 0
+                ]);
+            }
+        });
     }
+
 }
