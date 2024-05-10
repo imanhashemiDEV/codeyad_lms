@@ -10,7 +10,8 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "mhmiton/laravel-modules-livewire": "*",
-        "nwidart/laravel-modules": "^11.0"
+        "nwidart/laravel-modules": "^11.0",
+        "spatie/laravel-permission": "^6.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
