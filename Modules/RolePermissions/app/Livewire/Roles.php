@@ -7,58 +7,55 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Category\Models\Category;
+use Spatie\Permission\Models\Role;
 
 class Roles extends Component
 {
     use WithPagination;
 
-    public $parent_id=0;
-    public $title;
+    public $name;
     public $editedIndex;
     protected $paginationTheme = 'bootstrap';
 
 
-    public function createCategory(): void
+    public function createRole(): void
     {
-        Category::query()->create([
-            'title' => $this->title,
-            'parent_id' => $this->parent_id
+        Role::query()->create([
+            'name' => $this->name,
         ]);
 
-        $this->reset('title', 'parent_id');
-        session()->flash('message', 'دسته بندی ایجاد شد');
+        $this->reset('name');
+        session()->flash('message', 'نقش ایجاد شد');
     }
 
     public function editRow($id)
     {
-        $category = Category::query()->find($id);
-        $this->title = $category->title;
-        $this->parent_id = $category->parent_id;
+        $role = Role::query()->find($id);
+        $this->name = $role->name;
         $this->editedIndex=$id;
     }
 
     public function updateRow()
     {
-        Category::query()->find($this->editedIndex)->update([
-            'title' => $this->title,
-            'parent_id' => $this->parent_id
+        Role::query()->find($this->editedIndex)->update([
+            'name' => $this->name,
         ]);
 
-        $this->reset('title', 'parent_id');
-        session()->flash('message', 'دسته بندی ایجاد شد');
+        $this->reset('name');
+        session()->flash('message', 'نقش ویرایش شد');
         $this->editedIndex=null;
     }
 
-    #[On('destroy-category')]
-    public function destroyCategory($id)
+    #[On('destroy-role')]
+    public function destroyRole($id)
     {
-        Category::destroy($id);
+        Role::destroy($id);
     }
 
-    #[Layout('panel::layouts.app'),Title('دسته بندی ها')]
+    #[Layout('panel::layouts.app'),Title('نقش ها')]
     public function render()
     {
-        return view('rolepermissions::livewire.roles');
+        $roles = Role::query()->paginate(10);
+        return view('rolepermissions::livewire.roles',compact('roles'));
     }
 }
