@@ -79,10 +79,7 @@
                                    </div>
                                </div>
                            </td>
-                           <!-- Table data -->
-                           <td> {{$category->created_at}}</td>
-
-                           <!-- Table data -->
+                           <td> {{ \Hekmatinasser\Verta\Verta::instance($category->created_at)->format('%B %d، %Y') }}</td>
                            <td>
                                <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0" wire:click="editRow({{$category->id}})">ویرایش</a>
                                <button class="btn btn-sm btn-danger mb-0" wire:click="$dispatch('delete-category',{id:{{$category->id}} })">حذف</button>

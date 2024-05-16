@@ -2,7 +2,7 @@
 
     <!-- Title -->
     <div class="row mb-3">
-        <h1 class="h3 mb-5 mb-sm-0 fs-5 "> دسته بندی</h1>
+        <h1 class="h3 mb-5 mb-sm-0 fs-5 ">مجوزها</h1>
         <div class="col-12 mt-5 d-sm-flex justify-content-between align-items-center">
 
             <div class="card-body">
@@ -10,25 +10,14 @@
 
                     <!-- Input item -->
                     <div class="col-6">
-                        <label class="form-label">عنوان دسته بندی</label>
-                        <input wire:model="title" type="text" class="form-control">
-                    </div>
-
-                    <!-- Choice item -->
-                    <div class="col-lg-6">
-                        <label class="form-label">دسته پدر</label>
-                        <select wire:model="parent_id" class="form-select js-choice z-index-9 border-0 bg-light" aria-label=".form-select-sm">
-                            <option value="0">انتخاب</option>
-                            @foreach($parentCategories as $key=>$value)
-                                <option value="{{$key}}">{{$value}}</option>
-                            @endforeach
-                        </select>
+                        <label class="form-label">عنوان مجوز</label>
+                        <input wire:model="name" type="text" class="form-control">
                     </div>
                     <div class="d-sm-flex justify-content-start">
                         @if($editedIndex)
                             <button type="button" class="btn btn-primary mb-0" wire:click="updateRow">ویرایش</button>
                         @else
-                            <button type="button" class="btn btn-primary mb-0" wire:click="createCategory">ثبت</button>
+                            <button type="button" class="btn btn-primary mb-0" wire:click="createPermission">ثبت</button>
                         @endif
 
                     </div>
@@ -48,8 +37,7 @@
                     <!-- Table head -->
                     <thead>
                     <tr>
-                        <th scope="col" class="border-0 rounded-start">نام دسته بندی</th>
-                        <th scope="col" class="border-0">دسته پدر</th>
+                        <th scope="col" class="border-0 rounded-start">نام مجوز</th>
                         <th scope="col" class="border-0">تاریخ ایجاد</th>
                         <th scope="col" class="border-0 rounded-end">عملیات</th>
                     </tr>
@@ -58,38 +46,24 @@
                     <!-- Table body START -->
                     <tbody>
 
-                    @foreach($categories as $index=>$category)
+                    @foreach($permissions as $index=>$permission)
                         <tr>
                             <!-- Table data -->
                             <td>
                                 <div class="d-flex align-items-center position-relative">
                                     <!-- Title -->
                                     <h6 class="table-responsive-title mb-0 ms-2">
-                                        <a href="#" class="stretched-link">{{$category->title}}</a>
+                                        <a href="#" class="stretched-link">{{$permission->name}}</a>
                                     </h6>
                                 </div>
                             </td>
-
-                            <!-- Table data -->
+                            <td> {{ \Hekmatinasser\Verta\Verta::instance($permission->created_at)->format('%B %d، %Y') }}</td>
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <!-- Info -->
-                                    <div class="ms-2">
-                                        <h6 class="mb-0 fw-light">{{$category->parent->title}}</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <!-- Table data -->
-                            <td> {{$category->created_at}}</td>
-
-                            <!-- Table data -->
-                            <td>
-                                <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0" wire:click="editRow({{$category->id}})">ویرایش</a>
-                                <button class="btn btn-sm btn-danger mb-0" wire:click="$dispatch('delete-category',{id:{{$category->id}} })">حذف</button>
+                                <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0" wire:click="editRow({{$permission->id}})">ویرایش</a>
+                                <button class="btn btn-sm btn-danger mb-0" wire:click="$dispatch('delete-permission',{id:{{$permission->id}} })">حذف</button>
                             </td>
                         </tr>
                     @endforeach
-
                     </tbody>
                     <!-- Table body END -->
                 </table>
@@ -102,9 +76,8 @@
         <!-- Card footer START -->
         <div class="card-footer bg-transparent pt-0">
             <!-- Pagination START -->
-
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-                {{$categories->links('vendor.livewire.admin-pagination')}}
+                {{$permissions->links('vendor.livewire.admin-pagination')}}
             </div>
             <!-- Pagination END -->
         </div>
@@ -115,7 +88,7 @@
 @push('scripts')
     <script>
         document.addEventListener('livewire:init', () => {
-            Livewire.on('delete-category', (event) => {
+            Livewire.on('delete-permission', (event) => {
                 Swal.fire({
                     title: "آیا از حذف مطمئن هستید؟",
                     icon: "warning",
@@ -126,7 +99,7 @@
                     cancelButtonText:"خیر"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Livewire.dispatch('destroy-category',{id:event.id})
+                        Livewire.dispatch('destroy-permission',{id:event.id})
                         Swal.fire({
                             title: "حذف انجام شد!",
                             icon: "success"

@@ -65,10 +65,7 @@
                                     <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">مجوزها</a>
                                 </div>
                             </td>
-                            <!-- Table data -->
-                            <td> {{$role->created_at}}</td>
-
-                            <!-- Table data -->
+                            <td> {{ \Hekmatinasser\Verta\Verta::instance($role->created_at)->format('%B %d، %Y') }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0" wire:click="editRow({{$role->id}})">ویرایش</a>
                                 <button class="btn btn-sm btn-danger mb-0" wire:click="$dispatch('delete-role',{id:{{$role->id}} })">حذف</button>
