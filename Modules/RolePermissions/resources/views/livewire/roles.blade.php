@@ -1,17 +1,18 @@
 <div class="page-content-wrapper border">
-
-    <!-- Title -->
     <div class="row mb-3">
         <h1 class="h3 mb-5 mb-sm-0 fs-5 ">نقش ها</h1>
         <div class="col-12 mt-5 d-sm-flex justify-content-between align-items-center">
-
             <div class="card-body">
                 <form class="row g-4">
-
                     <!-- Input item -->
                     <div class="col-6">
                         <label class="form-label">عنوان نقش</label>
                         <input wire:model="name" type="text" class="form-control">
+                       @error('name')
+                          <div class="text-danger">
+                              {{ $message }}
+                          </div>
+                       @enderror
                     </div>
                     <div class="d-sm-flex justify-content-start">
                         @if($editedIndex)
@@ -19,10 +20,19 @@
                         @else
                             <button type="button" class="btn btn-primary mb-0" wire:click="createRole">ثبت</button>
                         @endif
-
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="col-12 mt-5 d-sm-flex justify-content-between align-items-center">
+               @foreach($permissions as $permission)
+                   <div class="col-4">
+                      <div class="row">
+                          <label for="" class="form-label">{{$permission}} </label>
+                          <input type="checkbox" class="form-check" wire:model="user_permissions" value="{{$permission}}">
+                      </div>
+                   </div>
+               @endforeach
         </div>
     </div>
 
@@ -43,10 +53,8 @@
                         <th scope="col" class="border-0 rounded-end">عملیات</th>
                     </tr>
                     </thead>
-
                     <!-- Table body START -->
                     <tbody>
-
                     @foreach($roles as $index=>$role)
                         <tr>
                             <!-- Table data -->
@@ -58,12 +66,13 @@
                                     </h6>
                                 </div>
                             </td>
-
                             <!-- Table data -->
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">مجوزها</a>
-                                </div>
+                                <ul>
+                                    @foreach($role->permissions as $permission)
+                                        <li>{{$permission->name}}</li>
+                                    @endforeach
+                                </ul>
                             </td>
                             <td> {{ \Hekmatinasser\Verta\Verta::instance($role->created_at)->format('%B %d، %Y') }}</td>
                             <td>
@@ -81,7 +90,6 @@
             <!-- Course table END -->
         </div>
         <!-- Card body END -->
-
         <!-- Card footer START -->
         <div class="card-footer bg-transparent pt-0">
             <!-- Pagination START -->
