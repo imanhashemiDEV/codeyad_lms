@@ -14,6 +14,6 @@ use Modules\User\Http\Controllers\UserController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('user', UserController::class)->names('user');
+Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+    Route::get('users', \Modules\User\Livewire\Users::class)->name('panel.users');
 });

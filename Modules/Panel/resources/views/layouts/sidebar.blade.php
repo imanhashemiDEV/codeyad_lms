@@ -31,6 +31,10 @@
                     <a  href="{{route('panel.permissions')}}" class="nav-link active">
                         <i class="bi bi-basket fa-fw me-2"></i>مجوز ها</a>
                 </li>
+                <li class="nav-item">
+                    <a  href="{{route('panel.users')}}" class="nav-link active">
+                        <i class="bi bi-person fa-fw me-2"></i>کاربر ها</a>
+                </li>
 
             </ul>
             <!-- Sidebar menu end -->

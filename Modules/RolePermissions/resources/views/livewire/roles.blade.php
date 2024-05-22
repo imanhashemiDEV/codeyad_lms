@@ -14,20 +14,20 @@
                           </div>
                        @enderror
                     </div>
-                    <div class="d-sm-flex justify-content-start">
+                    <div class="col-6" style="padding-top: 1.8rem;">
                         @if($editedIndex)
                             <button type="button" class="btn btn-primary mb-0" wire:click="updateRow">ویرایش</button>
                         @else
-                            <button type="button" class="btn btn-primary mb-0" wire:click="createRole">ثبت</button>
+                            <button type="button" class="btn btn-primary" wire:click="createRole">ثبت</button>
                         @endif
                     </div>
                 </form>
             </div>
         </div>
-        <div class="col-12 mt-5 d-sm-flex justify-content-between align-items-center">
+        <div class="col-12 mt-5 d-sm-flex justify-content-start align-items-center">
                @foreach($permissions as $permission)
-                   <div class="col-4">
-                      <div class="row">
+                   <div class="col-2">
+                      <div class="d-flex gap-3 align-items-center">
                           <label for="" class="form-label">{{$permission}} </label>
                           <input type="checkbox" class="form-check" wire:model="user_permissions" value="{{$permission}}">
                       </div>
