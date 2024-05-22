@@ -1,21 +1,31 @@
 <div class="page-content-wrapper border">
+    @if($selected_user)
     <div class="row mb-3">
         <h1 class="h3 mb-5 mb-sm-0 fs-5 ">نقش کاربر</h1>
         <div class="col-12 mt-5 d-sm-flex justify-content-between align-items-center">
-
             <div class="card-body">
                 <form class="row g-4">
                     <div class="col-6">
-                        <label class="form-label">سید ایمان هاشمی</label>
+                        <label class="form-label">{{$selected_user->name}}</label>
                     </div>
                     <div class="col-lg-6">
-                        <button type="button" class="btn btn-primary mb-0">افزودن  نقش</button>
+                        <button wire:click="createUserRoles" type="button" class="btn btn-primary mb-0">افزودن  نقش</button>
                     </div>
                 </form>
             </div>
         </div>
+        <div class="col-12 mt-5 d-sm-flex justify-content-start align-items-center">
+            @foreach($roles as $role)
+                <div class="col-2">
+                    <div class="d-flex gap-3 align-items-center">
+                        <label for="" class="form-label">{{$role}} </label>
+                        <input type="checkbox" class="form-check" wire:model="user_roles" value="{{$role}}">
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
-
+    @endif
     <div class="card bg-transparent border">
         <!-- Card body START -->
         <div class="card-body">
@@ -52,14 +62,16 @@
                            </td>
                            <td>
                                <div class="d-flex align-items-center position-relative">
-                                   <h6 class="table-responsive-title mb-0 ms-2">
-                                       <a href="#" class="stretched-link">مدیر کل</a>
-                                   </h6>
+                                   <ul>
+                                   @foreach($user->getRoleNames() as $role)
+                                       <li>{{$role}}</li>
+                                   @endforeach
+                                   </ul>
                                </div>
                            </td>
                            <td>{{ \Hekmatinasser\Verta\Verta::instance($user->created_at)->format('%B %d، %Y') }}</td>
                            <td>
-                               <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">وضعیت</a>
+                               <a href="#" wire:click="selectUser({{$user->id}})" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">افزودن نقش</a>
                            </td>
                        </tr>
                    @endforeach

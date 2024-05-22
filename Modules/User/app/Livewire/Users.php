@@ -3,64 +3,35 @@
 namespace Modules\User\Livewire;
 
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Category\Models\Category;
 use Modules\User\app\Models\User;
+use Spatie\Permission\Models\Role;
 
 class Users extends Component
 {
     use WithPagination;
-
-    public $parent_id=0;
-    public $title;
-    public $editedIndex;
+    public $selected_user;
+    public $user_roles=[];
     protected $paginationTheme = 'bootstrap';
 
-
-    public function createCategory(): void
+    public function selectUser($user_id)
     {
-        Category::query()->create([
-            'title' => $this->title,
-            'parent_id' => $this->parent_id
-        ]);
-
-        $this->reset('title', 'parent_id');
-        session()->flash('message', 'دسته بندی ایجاد شد');
+        $this->selected_user = User::query()->find($user_id);
+        foreach ($this->selected_user->getRoleNames() as $role) {
+            $this->user_roles[] = $role;
+        }
     }
-
-    public function editRow($id)
+    public function createUserRoles()
     {
-        $category = Category::query()->find($id);
-        $this->title = $category->title;
-        $this->parent_id = $category->parent_id;
-        $this->editedIndex=$id;
+        $this->selected_user->syncRoles($this->user_roles);
     }
-
-    public function updateRow()
-    {
-        Category::query()->find($this->editedIndex)->update([
-            'title' => $this->title,
-            'parent_id' => $this->parent_id
-        ]);
-
-        $this->reset('title', 'parent_id');
-        session()->flash('message', 'دسته بندی ایجاد شد');
-        $this->editedIndex=null;
-    }
-
-    #[On('destroy-category')]
-    public function destroyCategory($id)
-    {
-        Category::destroy($id);
-    }
-
-    #[Layout('panel::layouts.app'),Title('دسته بندی ها')]
+    #[Layout('panel::layouts.app'),Title('کاربران')]
     public function render()
     {
         $users = User::query()->paginate(10);
-        return view('user::livewire.users', compact('users'));
+        $roles = Role::query()->pluck('name');
+        return view('user::livewire.users', compact('users','roles'));
     }
 }
