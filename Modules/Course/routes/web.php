@@ -14,6 +14,8 @@ use Modules\Course\Http\Controllers\CourseController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('course', CourseController::class)->names('course');
+
+Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+    Route::get('courses', \Modules\Course\Livewire\Courses::class)->name('panel.courses');
+    Route::get('teacher_courses', \Modules\Course\Livewire\TeacherCourses::class)->name('panel.teacher_courses');
 });
