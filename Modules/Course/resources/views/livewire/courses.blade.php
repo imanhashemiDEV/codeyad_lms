@@ -74,7 +74,7 @@
         <div class="card-footer bg-transparent pt-0">
             <!-- Pagination START -->
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-                {{$users->links('vendor.livewire.admin-pagination')}}
+                {{$courses->links('vendor.livewire.admin-pagination')}}
             </div>
             <!-- Pagination END -->
         </div>
