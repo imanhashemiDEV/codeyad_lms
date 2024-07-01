@@ -14,7 +14,7 @@ class TeacherCourses extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    #[Layout('panel::layouts.app'),Title('لیست دوره ها')]
+    #[Layout('panel::layouts.app'),Title('لیست دوره های مدرس')]
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $courses = Course::query()

@@ -6,7 +6,7 @@
 
             <div class="card-body">
                 <div class="d-sm-flex justify-content-start">
-                    <a href="#" class="btn btn-primary mb-0">افزودن دوره</a>
+                    <a href="{{route('panel.add_course')}}" class="btn btn-primary mb-0">افزودن دوره</a>
                 </div>
             </div>
         </div>
@@ -78,6 +78,30 @@
     </div>
 </div>
 @push('scripts')
+    <script>
+
+
+        // Upload image
+        document.querySelector(".upload-button-image").onclick = function() {
+            document.querySelector(".hidden-upload-image").click();
+        };
+
+        document.querySelector(".hidden-upload-image").onchange = function() {
+            document.querySelector(".upload-name-image").value = event.target.files[0].name;
+        };
+
+        // Upload Video .mp4
+        document.querySelector(".upload-button-mp4").onclick = function() {
+            document.querySelector(".hidden-upload-mp4").click();
+        };
+
+        document.querySelector(".hidden-upload-mp4").onchange = function() {
+            document.querySelector(".upload-name-mp4").value = event.target.files[0].name;
+        };
+
+
+
+    </script>
     <script>
         document.addEventListener('livewire:init', () => {
             Livewire.on('delete-category', (event) => {

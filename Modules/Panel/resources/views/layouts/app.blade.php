@@ -126,7 +126,6 @@
 <!-- Template Functions -->
 <script src="{{url('assets/js/functions.js')}}"></script>
 @stack('scripts')
-
 </body>
 
 </html>
