@@ -80,28 +80,3 @@
         </div>
     </div>
 </div>
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('delete-category', (event) => {
-                Swal.fire({
-                    title: "آیا از حذف مطمئن هستید؟",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "بله!",
-                    cancelButtonText:"خیر"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Livewire.dispatch('destroy-category',{id:event.id})
-                        Swal.fire({
-                            title: "حذف انجام شد!",
-                            icon: "success"
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-@endpush
