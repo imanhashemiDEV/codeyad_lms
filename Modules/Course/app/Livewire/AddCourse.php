@@ -7,12 +7,14 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Modules\Category\Models\Category;
 use Modules\Course\app\Enums\CourseStatus;
 use Modules\Course\Models\Course;
 
 class AddCourse extends Component
 {
-
+   use WithFileUploads;
     #[Rule('required')]
     public $category_id;
     #[Rule('required')]
@@ -23,31 +25,40 @@ class AddCourse extends Component
     public $description;
     #[Rule('required')]
     public $level;
-    #[Rule('required|mimetypes::video/mp4, video/mpeg')]
+    #[Rule('required')]
     public $video;
     #[Rule('required|mimes:jpg,png')]
     public $image;
 
 
-    public function createTeacherCourse()
+    public function createTeacherCourse(): void
     {
-        Course::query()->create([
+         $image_name = $this->image->hashName();
+         $video_name = $this->video->hashName();
+
+
+        $course = Course::query()->create([
             'user_id'=>auth()->user()->id,
-            'category_id'=>$this->category_id,
+            'category_id'=>$this->category_id['value'],
             'title'=>$this->title,
             'slug'=>Str::slug($this->title),
             'price'=>$this->price,
             'description'=>$this->description,
-            'level'=>$this->level,
+            'level'=>$this->level['value'],
             'status'=>CourseStatus::Draft->value,
-            'video'=>$this->video,
-            'image'=>$this->image
+            'video'=>$video_name,
+            'image'=>$image_name
         ]);
+
+        $this->image->store("images/courses/$course->title",'public');
+        $this->video->store("videos/courses/$course->title",'public');
+
     }
 
     #[Layout('panel::layouts.app'),Title('اضافه کردن دوره')]
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('course::livewire.add-course');
+        $categories = Category::query()->where('parent_id','!=',0)->pluck('title','id');
+        return view('course::livewire.add-course', compact('categories'));
     }
 }

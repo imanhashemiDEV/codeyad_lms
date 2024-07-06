@@ -14,10 +14,20 @@
                     <span class="btn btn btn-secondary-soft cursor-pointer upload-button-image border-start-0">آپلود بنر</span>
                 </div>
                 <input wire:model="image" type="file" class="d-none hidden-upload-image"/>
+                @error('image')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
         </div>
         <div class="col-12">
-            <div class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+            <div
+                x-data="{ uploading: false, progress: 0 }"
+                x-on:livewire-upload-start="uploading = true"
+                x-on:livewire-upload-finish="uploading = false"
+                x-on:livewire-upload-cancel="uploading = false"
+                x-on:livewire-upload-error="uploading = false"
+                x-on:livewire-upload-progress="progress = $event.detail.progress"
+                class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
                 <label class="form-label">آپلود ویدیو</label>
 
                 <div class="input-group mb-3">
@@ -27,8 +37,11 @@
 
                 </div>
                 <input wire:model="video" type="file" class="d-none hidden-upload-mp4"/>
-                <div class="progress m-b-10">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                @error('video')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+                <div class="progress m-b-10" x-show="uploading">
+                    <div class="progress-bar" role="progressbar" x-bind:style="`width:${progress}%`" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" x-text="`${progress}`">
                     </div>
                 </div>
             </div>
@@ -37,43 +50,55 @@
         <div class="col-12">
             <label class="form-label">عنوان</label>
             <input wire:model="title" class="form-control" type="text" placeholder="آموزش ساخت وب سایت خبری">
+            @error('title')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <!-- Short description -->
         <div class="col-12">
             <label class="form-label">توضیحات کوتاه</label>
             <textarea wire:model="description" class="form-control" rows="2" placeholder="کلمات کلیدی"></textarea>
+            @error('description')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <!-- Course category -->
-        <div class="col-md-6">
+        <div class="col-md-6" wire:ignore>
             <label class="form-label">دسته بندی</label>
             <select wire:model="category_id" class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="true">
-                <option value="">انتخاب</option>
-                <option>مهندسی</option>
-                <option>پزشکی</option>
-                <option>طراحی وب</option>
-                <option>حسابداری</option>
-                <option>برنامه نویسی</option>
+                <option>انتخاب</option>
+                @foreach($categories as $key=>$value)
+                    <option value="{{$key}}">{{$value}}</option>
+                @endforeach
             </select>
+            @error('category_id')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <!-- Course level -->
-        <div class="col-md-6">
+        <div class="col-md-6" wire:ignore>
             <label class="form-label">سطح دوره</label>
             <select wire:model="level" class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="false" data-remove-item-button="true">
-                <option value="">انتخاب سطح</option>
-                <option>همه</option>
-                <option>مقدماتی</option>
-                <option>متوسطه</option>
-                <option>پیشرفته</option>
+                <option>انتخاب سطح</option>
+                <option  value="primary">مقدماتی</option>
+                <option  value="medium">متوسطه</option>
+                <option  value="professional">پیشرفته</option>
             </select>
+            @error('level')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
 
         <!-- Course price -->
         <div class="col-md-6">
             <label class="form-label">قیمت</label>
             <input wire:model="price" type="text" class="form-control" placeholder="90,000 تومان">
+            @error('price')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
         <div class="col-md-6 d-flex align-items-center mt-6">
             <button wire:click="createTeacherCourse" class="btn btn-primary">ثبت</button>
