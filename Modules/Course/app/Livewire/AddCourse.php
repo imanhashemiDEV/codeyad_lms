@@ -11,6 +11,7 @@ use Livewire\WithFileUploads;
 use Modules\Category\Models\Category;
 use Modules\Course\app\Enums\CourseStatus;
 use Modules\Course\Models\Course;
+use Modules\Panel\app\Helpers\Helper;
 
 class AddCourse extends Component
 {
@@ -33,6 +34,9 @@ class AddCourse extends Component
 
     public function createTeacherCourse(): void
     {
+
+        $this->validate();
+
          $image_name = $this->image->hashName();
          $video_name = $this->video->hashName();
 
@@ -41,7 +45,7 @@ class AddCourse extends Component
             'user_id'=>auth()->user()->id,
             'category_id'=>$this->category_id['value'],
             'title'=>$this->title,
-            'slug'=>Str::slug($this->title),
+            'slug'=>Helper::make_slug($this->title),
             'price'=>$this->price,
             'description'=>$this->description,
             'level'=>$this->level['value'],
@@ -52,6 +56,9 @@ class AddCourse extends Component
 
         $this->image->store("images/courses/$course->title",'public');
         $this->video->store("videos/courses/$course->title",'public');
+
+        session()->flash('message','دوره با موفقیت ثبت شد');
+        $this->redirectRoute('panel.teacher_courses');
 
     }
 

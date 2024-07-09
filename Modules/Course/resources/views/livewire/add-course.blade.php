@@ -48,17 +48,17 @@
         </div>
         <!-- Course title -->
         <div class="col-12">
-            <label class="form-label">عنوان</label>
-            <input wire:model="title" class="form-control" type="text" placeholder="آموزش ساخت وب سایت خبری">
+            <label class="form-label">عنوان دوره</label>
+            <input wire:model="title" class="form-control" type="text" >
             @error('title')
             <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
 
         <!-- Short description -->
-        <div class="col-12">
-            <label class="form-label">توضیحات کوتاه</label>
-            <textarea wire:model="description" class="form-control" rows="2" placeholder="کلمات کلیدی"></textarea>
+        <div class="col-12" wire:ignore>
+            <label class="form-label">توضیحات </label>
+            <textarea id="editor" class="form-control" rows="2"></textarea>
             @error('description')
             <span class="text-danger">{{ $message }}</span>
             @enderror
@@ -82,7 +82,7 @@
         <div class="col-md-6" wire:ignore>
             <label class="form-label">سطح دوره</label>
             <select wire:model="level" class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="false" data-remove-item-button="true">
-                <option>انتخاب سطح</option>
+                <option>انتخاب</option>
                 <option  value="primary">مقدماتی</option>
                 <option  value="medium">متوسطه</option>
                 <option  value="professional">پیشرفته</option>
@@ -125,5 +125,49 @@
         document.querySelector(".hidden-upload-mp4").onchange = function() {
             document.querySelector(".upload-name-mp4").value = event.target.files[0].name;
         };
+
+
+        $(document).ready(function () {
+
+            ClassicEditor
+                .create(document.querySelector('#editor'), {
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            '|',
+                            'fontSize',
+                            'fontColor',
+                            '|',
+                            'imageUpload',
+                            'blockQuote',
+                            'insertTable',
+                            'undo',
+                            'redo',
+                            'codeBlock'
+                        ]
+                    },
+                    language: {
+                        ui: 'fa',
+                        content: 'fa'
+                    },
+                    table: {
+                        contentToolbar: [
+                            'tableColumn',
+                            'tableRow',
+                            'mergeTableCells'
+                        ]
+                    },
+
+                })
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        @this.set('description', editor.getData());
+                    })
+                })
+        });
     </script>
 @endpush

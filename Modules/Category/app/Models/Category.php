@@ -18,21 +18,21 @@ class Category extends Model
         'parent_id'
     ];
 
-    public function parent()
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
       return $this->belongsTo(self::class, 'parent_id','id')
           ->withDefault(['title'=>'-------']);
     }
 
-    public function child()
+    public function child(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
       return $this->hasMany(self::class,'parent_id','id');
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
-        self::deleting(function ($category) {
+        self::deleting(static function ($category) {
             foreach($category->child()->get() as $child){
                 $child->update([
                     'parent_id' => 0
