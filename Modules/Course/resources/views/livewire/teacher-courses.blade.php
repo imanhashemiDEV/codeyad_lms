@@ -55,7 +55,11 @@
                             </td>
                             <td>{{ \Hekmatinasser\Verta\Verta::instance($course->created_at)->format('%B %d، %Y') }}</td>
                             <td>
-                                <a href="#"  class="btn btn-sm btn-info me-1 mb-1 mb-md-0">افزودن قسمت</a>
+                                @if($course->status === \Modules\Course\app\Enums\CourseStatus::Active->value)
+                                    <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">افزودن قسمت</a>
+                                @else
+                                    <a href="#" class="btn btn-sm btn-info me-1 mb-1 mb-md-0">دوره در حال بررسی است</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

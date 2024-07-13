@@ -29,7 +29,7 @@ class Course extends Model
 
     public function user()
     {
-        return $this->blongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     protected static function newFactory(): CourseFactory
