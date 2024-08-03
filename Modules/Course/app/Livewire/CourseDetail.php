@@ -6,14 +6,22 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\Course\Models\Season;
 
 class CourseDetail extends Component
 {
+    use WithFileUploads;
 
     public $course_id;
     #[Rule('required')]
     public $title;
+
+
+//    #[Rule('required')]
+    public $lesson_title,$lesson_e_title,$video,$is_free;
+
+    public $attachment;
 
     public function mount($course_id)
     {
@@ -42,6 +50,11 @@ class CourseDetail extends Component
         $this->dispatch('closeSeasonModal');
 
 
+    }
+
+    public function AddLesson($season_id)
+    {
+        dd($this->is_free);
     }
     #[Layout('panel::layouts.app'),Title('جزئیات دوره')]
     public function render()

@@ -20,7 +20,7 @@
                     <div class="accordion-item mb-3">
                         <h6 class="accordion-header font-base" id="heading-1">
                             <button class="accordion-button fw-bold rounded d-inline-block collapsed d-block pe-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
-                                معرفی دوره فتوشاپ
+                                {{$season->title}}
                             </button>
                         </h6>
 
@@ -60,7 +60,7 @@
                                 <!-- Video item END -->
 
                                 <!-- Add topic -->
-                                <a href="#" class="btn btn-sm btn-dark mb-0" data-bs-toggle="modal" data-bs-target="#addTopic"><i class="bi bi-plus-circle me-2"></i>افزودن</a>
+                                <a href="#" class="btn btn-sm btn-dark mb-0" data-bs-toggle="modal" data-bs-target="#addLesson"><i class="bi bi-plus-circle me-2"></i>افزودن</a>
                             </div>
                             <!-- Topic END -->
                         </div>
@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addSeason" tabindex="-1" aria-labelledby="addLectureLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="addSeason" tabindex="-1" aria-labelledby="addLectureLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addTopic" tabindex="-1" aria-labelledby="addTopicLabel" aria-hidden="true">
+    <div class="modal fade" id="addLesson" tabindex="-1" aria-labelledby="addTopicLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -108,12 +108,12 @@
                         <!-- Topic name -->
                         <div class="col-md-6">
                             <label class="form-label">نام فارسی قسمت</label>
-                            <input class="form-control" type="text" >
+                            <input wire:model="lesson_title" class="form-control" type="text" >
                         </div>
                         <!-- Video link -->
                         <div class="col-md-6">
                             <label class="form-label">نام انگلیسی قسمت</label>
-                            <input class="form-control" type="text" >
+                            <input wire:model="lesson_e_title" class="form-control" type="text" >
                         </div>
                         <!-- Description -->
 
@@ -121,26 +121,36 @@
                         <div class="col-6 mt-3">
                             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                 <!-- رایگان button -->
-                                <input type="radio" class="btn-check" name="options" id="option1" checked="">
+                                <input wire:model="is_free" type="radio" class="btn-check" name="options" id="option1" checked="" value="1">
                                 <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option1">رایگان</label>
                                 <!-- Premium button -->
-                                <input type="radio" class="btn-check" name="options" id="option2">
+                                <input wire:model="is_free" value="0" type="radio" class="btn-check" name="options" id="option2">
                                 <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option2">پولی</label>
                             </div>
                         </div>
 
                         <div class="col-12">
-                            <div class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
+                            <div
+                                x-data="{ uploading: false, progress: 0 }"
+                                x-on:livewire-upload-start="uploading = true"
+                                x-on:livewire-upload-finish="uploading = false"
+                                x-on:livewire-upload-cancel="uploading = false"
+                                x-on:livewire-upload-error="uploading = false"
+                                x-on:livewire-upload-progress="progress = $event.detail.progress"
+                                class="text-center justify-content-center align-items-center p-4 p-sm-5 border border-2 border-dashed position-relative rounded-3">
                                 <label class="form-label">آپلود ویدیو</label>
 
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control upload-name-mp4 border-end-0" id="inputGroupFile01"/>
+                                    <input  type="text" class="form-control upload-name-mp4 border-end-0" id="inputGroupFile01"/>
                                     <span class="btn btn btn-secondary-soft cursor-pointer upload-button-mp4 border-start-0">آپلود ویدئو</span>
 
                                 </div>
-                                <input type="file" class="d-none hidden-upload-mp4"/>
-                                <div class="progress m-b-10">
-                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
+                                <input wire:model="video" type="file" class="d-none hidden-upload-mp4"/>
+                                @error('video')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                <div class="progress m-b-10" x-show="uploading">
+                                    <div class="progress-bar" role="progressbar" x-bind:style="`width:${progress}%`" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" x-text="`${progress}`">
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +163,7 @@
                                     <input type="text" class="form-control upload-name-file border-end-0" id="inputGroupFile"/>
                                     <span class="btn btn btn-secondary-soft cursor-pointer upload-button-file border-start-0">آپلود ضمیمه</span>
                                 </div>
-                                <input type="file" class="d-none hidden-upload-file"/>
+                                <input wire:model="attachment" type="file" class="d-none hidden-upload-file"/>
                             </div>
                         </div>
 
@@ -161,11 +171,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">بستن</button>
-                    <button type="button" class="btn btn-success my-0">ذخیره</button>
+                    <button wire:click="AddLesson({{$season->id}})" type="button" class="btn btn-success my-0">ذخیره</button>
                 </div>
             </div>
         </div>
     </div>
+
 @push('scripts')
     <script>
         // Upload file
