@@ -7,6 +7,8 @@ use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Course\app\Enums\LessonStatus;
+use Modules\Course\Models\Lesson;
 use Modules\Course\Models\Season;
 
 class CourseDetail extends Component
@@ -16,9 +18,9 @@ class CourseDetail extends Component
     public $course_id;
     #[Rule('required')]
     public $title;
+    public $season_id;
 
-
-//    #[Rule('required')]
+   #[Rule('required')]
     public $lesson_title,$lesson_e_title,$video,$is_free;
 
     public $attachment;
@@ -52,9 +54,28 @@ class CourseDetail extends Component
 
     }
 
-    public function AddLesson($season_id)
+    public function AddLesson()
     {
-        dd($this->is_free);
+
+        $attachment_name = $this->attachment->hashName();
+        $video_name = $this->video->hashName();
+
+        Lesson::query()->create([
+            'user_id'=>auth()->user()->id,
+            'season_id'=>$this->season_id,
+            'title'=>$this->lesson_title,
+            'e_title'=>$this->lesson_e_title,
+            'status'=>LessonStatus::Draft->value,
+            'video'=>$video_name,
+            'attachment'=>$attachment_name,
+            'is_free'=>$this->is_free ?? false,
+        ]);
+
+        $this->attachment->store("attachments/courses/$this->course_id/$this->season_id",'public');
+        $this->video->store("videos/courses/$this->course_id/$this->season_id",'public');
+
+        $this->dispatch('closeLessonModal');
+
     }
     #[Layout('panel::layouts.app'),Title('جزئیات دوره')]
     public function render()

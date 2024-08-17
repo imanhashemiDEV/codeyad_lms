@@ -58,9 +58,9 @@
                                 <!-- Divider -->
                                 <hr>
                                 <!-- Video item END -->
-
                                 <!-- Add topic -->
-                                <a href="#" class="btn btn-sm btn-dark mb-0" data-bs-toggle="modal" data-bs-target="#addLesson"><i class="bi bi-plus-circle me-2"></i>افزودن</a>
+                                <a href="#" class="btn btn-sm btn-dark mb-0" data-bs-toggle="modal"
+                                x-on:click="$wire.set('season_id',{{$season->id}})"   data-bs-target="#addLesson"><i class="bi bi-plus-circle me-2"></i>افزودن</a>
                             </div>
                             <!-- Topic END -->
                         </div>
@@ -68,7 +68,6 @@
                     <!-- Item END -->
                 @endforeach
             </div>
-
         </div>
     </div>
 
@@ -121,10 +120,10 @@
                         <div class="col-6 mt-3">
                             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                 <!-- رایگان button -->
-                                <input wire:model="is_free" type="radio" class="btn-check" name="options" id="option1" checked="" value="1">
+                                <input wire:model="is_free" type="radio" class="btn-check" name="options" id="option1" checked value="0">
                                 <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option1">رایگان</label>
                                 <!-- Premium button -->
-                                <input wire:model="is_free" value="0" type="radio" class="btn-check" name="options" id="option2">
+                                <input wire:model="is_free" value="1" type="radio" class="btn-check" name="options" id="option2">
                                 <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option2">پولی</label>
                             </div>
                         </div>
@@ -199,6 +198,12 @@
         document.addEventListener('livewire:init',()=>{
             Livewire.on('closeSeasonModal',()=>{
                 $('#addSeason').modal('toggle')
+            })
+        })
+
+        document.addEventListener('livewire:init',()=>{
+            Livewire.on('closeLessonModal',()=>{
+                $('#addLesson').modal('toggle')
             })
         })
 
