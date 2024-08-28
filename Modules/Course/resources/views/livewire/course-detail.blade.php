@@ -27,37 +27,20 @@
                         <div id="collapse-1" class="accordion-collapse collapse show" aria-labelledby="heading-1" data-bs-parent="#accordionExample2">
                             <!-- Topic START -->
                             <div class="accordion-body mt-3">
-                                <!-- Video item START -->
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="position-relative">
-                                        <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static"><i class="fas fa-play"></i></a>
-                                        <span class="ms-2 mb-0 h6 fw-light">معرفی دوره</span>
+                               @foreach($season->lessons as $lesson)
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="position-relative">
+                                            <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static"><i class="fas fa-play"></i></a>
+                                            <span class="ms-2 mb-0 h6 fw-light">{{$lesson->title}}</span>
+                                        </div>
+                                        <div>
+                                            <a href="#" class="btn btn-sm btn-success-soft btn-round me-1 mb-1 mb-md-0"><i class="far fa-fw fa-edit"></i></a>
+                                            <button class="btn btn-sm btn-danger-soft btn-round mb-0"><i class="fas fa-fw fa-times"></i></button>
+                                        </div>
                                     </div>
-                                    <!-- Edit and cancel button -->
-                                    <div>
-                                        <a href="#" class="btn btn-sm btn-success-soft btn-round me-1 mb-1 mb-md-0"><i class="far fa-fw fa-edit"></i></a>
-                                        <button class="btn btn-sm btn-danger-soft btn-round mb-0"><i class="fas fa-fw fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <!-- Divider -->
-                                <hr>
-                                <!-- Video item END -->
+                                    <hr>
+                               @endforeach
 
-                                <!-- Video item START -->
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="position-relative">
-                                        <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static"><i class="fas fa-play"></i></a>
-                                        <span class="ms-2 mb-0 h6 fw-light">دیجیتال مارکتنیگ چیست؟</span>
-                                    </div>
-                                    <!-- Edit and cancel button -->
-                                    <div>
-                                        <a href="#" class="btn btn-sm btn-success-soft btn-round me-1 mb-1 mb-md-0"><i class="far fa-fw fa-edit"></i></a>
-                                        <button class="btn btn-sm btn-danger-soft btn-round mb-0"><i class="fas fa-fw fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <!-- Divider -->
-                                <hr>
-                                <!-- Video item END -->
                                 <!-- Add topic -->
                                 <a href="#" class="btn btn-sm btn-dark mb-0" data-bs-toggle="modal"
                                 x-on:click="$wire.set('season_id',{{$season->id}})"   data-bs-target="#addLesson"><i class="bi bi-plus-circle me-2"></i>افزودن</a>
@@ -170,7 +153,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">بستن</button>
-                    <button wire:click="AddLesson({{$season->id}})" type="button" class="btn btn-success my-0">ذخیره</button>
+                    @isset($season)
+                        <button wire:click="AddLesson({{$season->id}})" type="button" class="btn btn-success my-0">ذخیره</button>
+                    @endisset
                 </div>
             </div>
         </div>

@@ -56,8 +56,11 @@ class CourseDetail extends Component
 
     public function AddLesson()
     {
+        $this->validate();
+         if($this->attachment){
+             $attachment_name = $this->attachment->hashName();
+         }
 
-        $attachment_name = $this->attachment->hashName();
         $video_name = $this->video->hashName();
 
         Lesson::query()->create([
@@ -67,7 +70,7 @@ class CourseDetail extends Component
             'e_title'=>$this->lesson_e_title,
             'status'=>LessonStatus::Draft->value,
             'video'=>$video_name,
-            'attachment'=>$attachment_name,
+            'attachment'=>$this->attachment ? $attachment_name : null,
             'is_free'=>$this->is_free ?? false,
         ]);
 
