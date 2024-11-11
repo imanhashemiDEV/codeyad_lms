@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Course\app\Enums\LessonStatus;
 
 return new class extends Migration
 {
@@ -13,11 +14,11 @@ return new class extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('season_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('season_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->string('e_title');
-            $table->string('status')->default(\Modules\Course\app\Enums\LessonStatus::Draft->value);
+            $table->string('status')->default(LessonStatus::Draft->value);
             $table->string('video');
             $table->string('attachment')->nullable();
             $table->boolean('is_free')->default(false);

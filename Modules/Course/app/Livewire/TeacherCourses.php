@@ -2,6 +2,7 @@
 
 namespace Modules\Course\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -15,7 +16,7 @@ class TeacherCourses extends Component
     protected $paginationTheme = 'bootstrap';
 
     #[Layout('panel::layouts.app'),Title('لیست دوره های مدرس')]
-    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
+    public function render():View
     {
         $courses = Course::query()
             ->where('user_id', auth()->user()->id)

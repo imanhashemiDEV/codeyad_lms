@@ -3,6 +3,7 @@
 namespace Modules\Auth\Livewire;
 
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
@@ -21,7 +22,7 @@ class Register extends Component
     public $password;
     public $password_confirmation;
 
-    public function registerUser()
+    public function registerUser(): \Illuminate\Http\RedirectResponse
     {
         $this->validate();
 
@@ -37,7 +38,7 @@ class Register extends Component
 
     }
     #[Layout('auth::layouts.app'),Title('ثبت نام')]
-    public function render()
+    public function render():View
     {
         return view('auth::livewire.register');
     }

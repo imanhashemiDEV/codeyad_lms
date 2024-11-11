@@ -2,6 +2,7 @@
 
 namespace Modules\Category\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
@@ -57,10 +58,10 @@ class Categories extends Component
     }
 
     #[Layout('panel::layouts.app'),Title('دسته بندی ها')]
-    public function render()
+    public function render():View
     {
         $parentCategories=Category::query()->where('parent_id',0)->pluck('title','id');
-        $categories = Category::query()->paginate(10);
+        $categories = Category::query()->paginate(6);
         return view('category::livewire.categories',compact('categories','parentCategories'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Modules\Course\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -38,7 +39,7 @@ class Courses extends Component
         }
     }
     #[Layout('panel::layouts.app'),Title('لیست دوره ها')]
-    public function render()
+    public function render():View
     {
         $courses = Course::query()->paginate(10);
         return view('course::livewire.courses', compact('courses'));

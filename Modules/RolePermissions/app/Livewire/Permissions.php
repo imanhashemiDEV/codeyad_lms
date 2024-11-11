@@ -2,6 +2,7 @@
 
 namespace Modules\RolePermissions\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
@@ -53,7 +54,7 @@ class Permissions extends Component
     }
 
     #[Layout('panel::layouts.app'),Title('مجوزها')]
-    public function render()
+    public function render():View
     {
         $permissions = Permission::query()->paginate(10);
         return view('rolepermissions::livewire.permissions',compact('permissions'));

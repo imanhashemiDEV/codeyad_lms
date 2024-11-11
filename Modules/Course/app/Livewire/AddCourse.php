@@ -2,6 +2,7 @@
 
 namespace Modules\Course\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
@@ -54,8 +55,8 @@ class AddCourse extends Component
             'image'=>$image_name
         ]);
 
-        $this->image->store("images/courses/$course->title",'public');
-        $this->video->store("videos/courses/$course->title",'public');
+        $this->image->store("images/courses/$course->id",'public');
+        $this->video->store("videos/courses/$course->id",'public');
 
         session()->flash('message','دوره با موفقیت ثبت شد');
         $this->redirectRoute('panel.teacher_courses');
@@ -63,7 +64,7 @@ class AddCourse extends Component
     }
 
     #[Layout('panel::layouts.app'),Title('اضافه کردن دوره')]
-    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
+    public function render():View
     {
         $categories = Category::query()->where('parent_id','!=',0)->pluck('title','id');
         return view('course::livewire.add-course', compact('categories'));

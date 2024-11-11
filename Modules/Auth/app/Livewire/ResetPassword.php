@@ -4,6 +4,7 @@ namespace Modules\Auth\Livewire;
 
 
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -47,7 +48,7 @@ class ResetPassword extends Component
         session()->flash('message','خطا در تغییر پسورد');
      }
 #[Layout('auth::layouts.app'),Title('فراموشی رمز عبور')]
-    public function render()
+    public function render():View
     {
         return view('auth::livewire.reset-password');
     }

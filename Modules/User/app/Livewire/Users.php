@@ -2,6 +2,7 @@
 
 namespace Modules\User\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -28,7 +29,7 @@ class Users extends Component
         $this->selected_user->syncRoles($this->user_roles);
     }
     #[Layout('panel::layouts.app'),Title('کاربران')]
-    public function render()
+    public function render():View
     {
         $users = User::query()->paginate(10);
         $roles = Role::query()->pluck('name');

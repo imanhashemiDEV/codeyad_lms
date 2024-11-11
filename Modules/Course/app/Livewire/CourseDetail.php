@@ -2,6 +2,7 @@
 
 namespace Modules\Course\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
@@ -81,7 +82,7 @@ class CourseDetail extends Component
 
     }
     #[Layout('panel::layouts.app'),Title('جزئیات دوره')]
-    public function render()
+    public function render():View
     {
         $seasons = Season::query()->where('course_id', $this->course_id)
             ->orderBy('priority','ASC')->get();
