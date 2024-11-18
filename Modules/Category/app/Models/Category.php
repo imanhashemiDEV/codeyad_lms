@@ -5,6 +5,7 @@ namespace Modules\Category\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Category\Database\factories\CategoryFactory;
+use Modules\Course\Models\Course;
 
 class Category extends Model
 {
@@ -27,6 +28,11 @@ class Category extends Model
     public function child(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
       return $this->hasMany(self::class,'parent_id','id');
+    }
+
+    public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Course::class);
     }
 
     protected static function boot(): void
