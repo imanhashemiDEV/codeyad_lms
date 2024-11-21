@@ -52,7 +52,7 @@
                                 </li>
                             @endforeach
                             <li> <hr class="dropdown-divider"></li>
-                            <li> <a class="dropdown-item bg-primary text-primary bg-opacity-10 rounded-2 mb-0" href="#">مشاهده همه</a></li>
+                            <li> <a class="dropdown-item bg-primary text-primary bg-opacity-10 rounded-2 mb-0" href="{{route('course.list')}}">مشاهده همه</a></li>
                         </ul>
                     </li>
                 </ul>
