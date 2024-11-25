@@ -24,6 +24,8 @@ class Course extends Model
         'level',
         'status',
         'video',
+        'viewed',
+        'sold',
         'image'
     ];
 

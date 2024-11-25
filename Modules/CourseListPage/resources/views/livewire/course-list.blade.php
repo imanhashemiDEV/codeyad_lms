@@ -29,8 +29,8 @@
                         <div class="col-xl-6">
                             <form class="border rounded p-2">
                                 <div class="input-group input-borderless">
-                                    <input class="form-control me-1" type="search" placeholder="جستجو دوره ...">
-                                    <button type="button" class="btn btn-primary mb-0 rounded z-index-1"><i class="fas fa-search"></i></button>
+                                    <input wire:model="search" class="form-control me-1" type="search" placeholder="جستجو دوره ...">
+                                    <button wire:click="$refresh" type="button" class="btn btn-primary mb-0 rounded z-index-1"><i class="fas fa-search"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -38,11 +38,11 @@
                         <!-- Select option -->
                         <div class="col-xl-3 mt-3 mt-xl-0">
                             <form class="border rounded p-2 input-borderless">
-                                <select class="form-select form-select-sm js-choice border-0" aria-label=".form-select-sm">
-                                    <option value="">پربازدیدترین</option>
-                                    <option>بروزترین</option>
-                                    <option>پرفروش ترین</option>
-                                    <option>جدیدترین</option>
+                                <select wire:model="sort" wire:change="$refresh" class="form-select form-select-sm js-choice border-0" aria-label=".form-select-sm">
+                                    <option value="updated">بروزترین</option>
+                                    <option value="most_viewed">پربازدیدترین</option>
+                                    <option value="most_sold">پرفروش ترین</option>
+                                    <option value="newest">جدیدترین</option>
                                 </select>
                             </form>
                         </div>
@@ -54,7 +54,6 @@
                                 <i class="fas fa-sliders-h me-1"></i> نمایش فیلتر
                             </button>
                             <!-- Advanced filter responsive toggler END -->
-                            <p class="mb-0 text-end">نمایش 1-7 از 32 نتیجه</p>
                         </div>
 
                     </div>
