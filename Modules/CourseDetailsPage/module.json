@@ -1,0 +1,11 @@
+{
+    "name": "CourseDetailsPage",
+    "alias": "coursedetailspage",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CourseDetailsPage\\Providers\\CourseDetailsPageServiceProvider"
+    ],
+    "files": []
+}

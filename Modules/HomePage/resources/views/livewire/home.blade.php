@@ -376,7 +376,7 @@
                                                 <a href="#" class="h6 mb-0"><i class="far fa-heart"></i></a>
                                             </div>
                                             <!-- Title -->
-                                            <h5 class="card-title fw-normal"><a href="#">{{$course->title}}</a></h5>
+                                            <h5 class="card-title fw-normal"><a href="{{route('course.details',$course->id)}}">{{$course->title}}</a></h5>
                                             <p class="mb-2 text-truncate-2">با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک</p>
                                             <!-- Rating star -->
                                             <ul class="list-inline mb-0">
