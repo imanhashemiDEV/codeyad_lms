@@ -133,90 +133,19 @@
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault9">
                                                 <label class="form-check-label" for="flexCheckDefault9">همه</label>
                                             </div>
-                                            <span class="small">(1256)</span>
+                                            <span class="small">({{count($this->courses)}})</span>
                                         </div>
                                         <!-- Checkbox -->
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault10">
-                                                <label class="form-check-label" for="flexCheckDefault10">طراحی وب</label>
-                                            </div>
-                                            <span class="small">(365)</span>
-                                        </div>
-                                        <!-- Checkbox -->
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault11">
-                                                <label class="form-check-label" for="flexCheckDefault11">برنامه نویسی</label>
-                                            </div>
-                                            <span class="small">(156)</span>
-                                        </div>
-                                        <!-- Checkbox -->
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault12">
-                                                <label class="form-check-label" for="flexCheckDefault12">حسابداری</label>
-                                            </div>
-                                            <span class="small">(65)</span>
-                                        </div>
-                                        <!-- Checkbox -->
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault17">
-                                                <label class="form-check-label" for="flexCheckDefault17">بانک اطلاعات</label>
-                                            </div>
-                                            <span class="small">(245)</span>
-                                        </div>
-                                        <!-- Checkbox -->
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault13">
-                                                <label class="form-check-label" for="flexCheckDefault13">داده کاوی</label>
-                                            </div>
-                                            <span class="small">(184)</span>
-                                        </div>
-                                        <!-- Checkbox -->
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault14">
-                                                <label class="form-check-label" for="flexCheckDefault14">شبکه</label>
-                                            </div>
-                                            <span class="small">(65)</span>
-                                        </div>
-                                        <!-- Checkbox -->
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault15">
-                                                <label class="form-check-label" for="flexCheckDefault15">عکاسی</label>
-                                            </div>
-                                            <span class="small">(99)</span>
-                                        </div>
-
-                                        <!-- Collapse body -->
-                                        <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                            <div class="card card-body p-0">
-                                                <!-- Checkbox -->
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault16">
-                                                        <label class="form-check-label" for="flexCheckDefault16">طراحی سایت</label>
-                                                    </div>
-                                                    <span class="small">(178)</span>
+                                        @foreach($this->categories as $category)
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="form-check" wire:click="setSelectedCategory({{$category->id}})">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault10">
+                                                    <label class="form-check-label" for="flexCheckDefault10">{{$category->title}}</label>
                                                 </div>
-                                                <!-- Checkbox -->
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault18">
-                                                        <label class="form-check-label" for="flexCheckDefault18">سئو</label>
-                                                    </div>
-                                                    <span class="small">(104)</span>
-                                                </div>
+                                                <span class="small">({{$category->courses_count}})</span>
                                             </div>
-                                        </div>
-                                        <!-- Collapse button -->
-                                        <a class=" p-0 mb-0 mt-2 btn-more d-flex align-items-center" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-                                            مشاهده <span class="see-more ms-1">بیشتر</span><span class="see-less ms-1">کمتر</span><i class="fas fa-angle-down ms-2"></i>
-                                        </a>
+                                        @endforeach
+                                        <!-- Checkbox -->
                                     </div>
                                 </div>
                                 <!-- Category END -->
@@ -319,12 +248,6 @@
                                 <!-- Language END -->
                             </form><!-- Form End -->
                         </div>
-
-                        <!-- Button -->
-                        <div class="d-grid p-2 p-lg-0 text-center">
-                            <button class="btn btn-primary mb-0">نتیجه فیلتر</button>
-                        </div>
-
                     </div>
                     <!-- Responsive offcanvas body END -->
                 </div>
