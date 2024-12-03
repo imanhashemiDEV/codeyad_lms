@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->integer('price')->default(0);
+            $table->integer('discount')->default(0);
             $table->text('description')->nullable();
             $table->string('level');
             $table->string('status')->default(CourseStatus::Draft->value);

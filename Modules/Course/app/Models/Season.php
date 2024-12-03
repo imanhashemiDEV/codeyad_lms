@@ -36,7 +36,7 @@ class Season extends Model
         return $this->hasMany(Lesson::class);
     }
 
-    protected static function newFactory(): SeasonFactory
+    protected static function newFactory()
     {
         //return SeasonFactory::new();
     }

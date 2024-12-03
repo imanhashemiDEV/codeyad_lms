@@ -56,7 +56,7 @@ class AddCourse extends Component
         ]);
 
         $this->image->store("images/courses/$course->id",'public');
-        $this->video->store("videos/courses/$course->id",'public');
+        $this->video->store("videos/courses/$course->id/intro",'public');
 
         session()->flash('message','دوره با موفقیت ثبت شد');
         $this->redirectRoute('panel.teacher_courses');

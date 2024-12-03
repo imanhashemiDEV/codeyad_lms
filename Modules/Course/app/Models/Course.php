@@ -4,6 +4,8 @@ namespace Modules\Course\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Modules\Category\Models\Category;
 use Modules\Course\Database\factories\CourseFactory;
 use Modules\User\app\Models\User;
@@ -21,6 +23,7 @@ class Course extends Model
         'title',
         'slug',
         'price',
+        'discount',
         'description',
         'level',
         'status',
@@ -40,12 +43,29 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function seasons()
+    public function seasons(): HasMany
     {
         return $this->hasMany(Season::class);
     }
 
-    protected static function newFactory(): CourseFactory
+    public function lessons(): HasManyThrough
+    {
+        return $this->hasManyThrough(Lesson::class, Season::class);
+    }
+
+
+    public function courseLevelTranslator($level)
+    {
+        switch ($level){
+            case 'professional': return "حرفه ای";
+            break;
+            case 'medium': return "متوسط";
+                break;
+            case 'easy': return "ساده";
+                break;
+        }
+    }
+    protected static function newFactory()
     {
         //return CourseFactory::new();
     }

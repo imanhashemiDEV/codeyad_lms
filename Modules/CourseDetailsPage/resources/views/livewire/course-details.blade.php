@@ -20,7 +20,7 @@
                         <li class="list-inline-item me-3 mb-1 mb-sm-0"><i class="fas fa-signal text-success me-2"></i>{{$course->level}}
                         </li>
                         <li class="list-inline-item me-3 mb-1 mb-sm-0"><i
-                                class="bi bi-patch-exclamation-fill text-danger me-2"></i>آخرین بروزرسانی 1401/02
+                                class="bi bi-patch-exclamation-fill text-danger me-2"></i> آخرین بروزرسانی {{\Hekmatinasser\Verta\Verta::instance($course->lessons()->latest()->first()->updated_at)->formatJalaliDate()}}
                         </li>
                         <li class="list-inline-item mb-0"><i class="fas fa-globe text-info me-2"></i>انگلیسی</li>
                     </ul>
@@ -159,14 +159,14 @@
                                         <div class="row g-0 align-items-center">
                                             <div class="col-md-5">
                                                 <!-- Image -->
-                                                <img src="assets/images/instructor/01.jpg" class="img-fluid rounded-3"
+                                                <img src="{{url('assets/images/instructor/01.jpg')}}" class="img-fluid rounded-3"
                                                      alt="instructor-image">
                                             </div>
                                             <div class="col-md-7">
                                                 <!-- Card body -->
                                                 <div class="card-body">
                                                     <!-- Title -->
-                                                    <h3 class="card-title mb-0 fs-5">مهدی ناصری</h3>
+                                                    <h3 class="card-title mb-0 fs-5">{{$course->user->name}}</h3>
                                                     <p class="mb-2"></p>
                                                     <!-- Social button -->
                                                     <ul class="list-inline mb-3">
@@ -906,7 +906,7 @@
                             <!-- Video START -->
                             <div class="card shadow p-2 mb-4 z-index-9">
                                 <div class="overflow-hidden rounded-3">
-                                    <img src="assets/images/courses/4by3/01.jpg" class="card-img" alt="course image">
+                                    <img src="{{url('images/courses/'.$course->id.'/'. $course->image)}}" class="card-img" alt="course image">
                                     <!-- Overlay -->
                                     <div class="bg-overlay bg-dark opacity-6"></div>
                                     <div class="card-img-overlay d-flex align-items-start flex-column p-3">
@@ -928,12 +928,14 @@
                                         <!-- Price and time -->
                                         <div>
                                             <div class="d-flex align-items-center">
-                                                <h3 class="fw-bold mb-0 fs-5 me-2">70,000 تومان</h3>
-                                                <span class="text-decoration-line-through mb-0 me-2">100,000</span>
-                                                <span class="badge text-bg-orange mb-0">60% تخفیف</span>
+                                                <h3 class="fw-bold mb-0 fs-5 me-2">
+                                                    {{ $course->price - (($course->price * $course->discount ) / 100) }}
+                                                    تومان</h3>
+                                                <span class="text-decoration-line-through mb-0 me-2">{{$course->price}}</span>
+                                                <span class="badge text-bg-orange mb-0">{{$course->discount}}% تخفیف</span>
                                             </div>
-                                            <p class="mb-0 text-danger"><i class="fas fa-stopwatch me-2"></i>5 روز باقی
-                                                مانده</p>
+{{--                                            <p class="mb-0 text-danger"><i class="fas fa-stopwatch me-2"></i>5 روز باقی--}}
+{{--                                                مانده</p>--}}
                                         </div>
 
                                         <!-- Share button with dropdown -->
@@ -975,7 +977,7 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <span class="h6 fw-light mb-0"><i
                                                 class="fas fa-fw fa-book-open text-primary"></i>تعداد ویدیو ها</span>
-                                        <span>30</span>
+                                        <span>{{count($course->lessons)}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-clock text-primary"></i>مدت زمان دوره</span>
@@ -983,7 +985,7 @@
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-signal text-primary"></i>سطح دوره</span>
-                                        <span>متوسطه</span>
+                                        <span>{{$course->courseLevelTranslator($course->level)}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-globe text-primary"></i>زبان</span>
@@ -1012,7 +1014,7 @@
                                 <div class="row gx-3 mb-3">
                                     <!-- Image -->
                                     <div class="col-4">
-                                        <img class="rounded" src="assets/images/courses/4by3/21.jpg" alt="">
+                                        <img class="rounded" src="{{url('assets/images/courses/4by3/21.jpg')}}" alt="">
                                     </div>
                                     <!-- Info -->
                                     <div class="col-8">
@@ -1032,7 +1034,7 @@
                                 <div class="row gx-3">
                                     <!-- Image -->
                                     <div class="col-4">
-                                        <img class="rounded" src="assets/images/courses/4by3/18.jpg" alt="">
+                                        <img class="rounded" src="{{url('assets/images/courses/4by3/18.jpg')}}" alt="">
                                     </div>
                                     <!-- Info -->
                                     <div class="col-8">
@@ -1104,7 +1106,7 @@
                             <div class="card p-2 border">
                                 <div class="rounded-top overflow-hidden">
                                     <div class="card-overlay-hover">
-                                        <img src="assets/images/courses/4by3/17.jpg" class="card-img-top"
+                                        <img src="{{url('assets/images/courses/4by3/17.jpg')}}" class="card-img-top"
                                              alt="course image">
                                     </div>
                                     <!-- Hover element -->
@@ -1137,7 +1139,7 @@
                                         </ul>
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img class="avatar-img rounded-circle" src="assets/images/avatar/09.jpg"
+                                            <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/09.jpg')}}"
                                                  alt="avatar">
                                         </div>
                                     </div>
@@ -1162,7 +1164,7 @@
                             <div class="card p-2 border">
                                 <div class="rounded-top overflow-hidden">
                                     <div class="card-overlay-hover">
-                                        <img src="assets/images/courses/4by3/18.jpg" class="card-img-top"
+                                        <img src="{{url('assets/images/courses/4by3/18.jpg')}}" class="card-img-top"
                                              alt="course image">
                                     </div>
                                     <!-- Hover element -->
@@ -1195,7 +1197,7 @@
                                         </ul>
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg"
+                                            <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/07.jpg')}}"
                                                  alt="avatar">
                                         </div>
                                     </div>
@@ -1220,7 +1222,7 @@
                             <div class="card p-2 border">
                                 <div class="rounded-top overflow-hidden">
                                     <div class="card-overlay-hover">
-                                        <img src="assets/images/courses/4by3/21.jpg" class="card-img-top"
+                                        <img src="{{url('assets/images/courses/4by3/21.jpg')}}" class="card-img-top"
                                              alt="course image">
                                     </div>
                                     <!-- Hover element -->
@@ -1253,7 +1255,7 @@
                                         </ul>
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg"
+                                            <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/05.jpg')}}"
                                                  alt="avatar">
                                         </div>
                                     </div>
@@ -1279,7 +1281,7 @@
                             <div class="card p-2 border">
                                 <div class="rounded-top overflow-hidden">
                                     <div class="card-overlay-hover">
-                                        <img src="assets/images/courses/4by3/20.jpg" class="card-img-top"
+                                        <img src="{{url('assets/images/courses/4by3/20.jpg')}}" class="card-img-top"
                                              alt="course image">
                                     </div>
                                     <!-- Hover element -->
@@ -1312,7 +1314,7 @@
                                         </ul>
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg"
+                                            <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/02.jpg')}}"
                                                  alt="avatar">
                                         </div>
                                     </div>
