@@ -424,14 +424,14 @@
                                         </div>
                                     </div>
                                     <!-- Review END -->
-
+                                    <hr>
                                     <!-- Student review START -->
                                     <div class="row">
                                         <!-- Review item START -->
                                         <div class="d-md-flex my-4">
                                             <!-- Avatar -->
                                             <div class="avatar avatar-xl me-4 flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" src="assets/images/avatar/09.jpg"
+                                                <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/09.jpg')}}"
                                                      alt="avatar">
                                             </div>
                                             <!-- Text -->
@@ -475,119 +475,48 @@
                                             </div>
                                         </div>
 
-                                        <!-- Comment children level 1 -->
-                                        <div class="d-md-flex mb-4 ps-4 ps-md-5">
-                                            <!-- Avatar -->
-                                            <div class="avatar avatar-lg me-4 flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" src="assets/images/avatar/02.jpg"
-                                                     alt="avatar">
-                                            </div>
-                                            <!-- Text -->
-                                            <div>
-                                                <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
-                                                    <h5 class="me-3 mb-0 fw-normal">مهرداد علیزاده</h5>
-                                                </div>
-                                                <!-- Info -->
-                                                <p class="small mb-2">1 روز قبل</p>
-                                                <p class="mb-2">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
-                                                    چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و
-                                                    مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-                                                    نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Divider -->
-                                        <hr>
-                                        <!-- Review item END -->
-
-                                        <!-- Review item START -->
-                                        <div class="d-md-flex my-4">
-                                            <!-- Avatar -->
-                                            <div class="avatar avatar-xl me-4 flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg"
-                                                     alt="avatar">
-                                            </div>
-                                            <!-- Text -->
-                                            <div>
-                                                <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
-                                                    <h5 class="me-3 mb-0 fw-normal">علی مرادی</h5>
-                                                    <!-- Review star -->
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="far fa-star text-warning"></i></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- Info -->
-                                                <p class="small mb-2">2 روز قبل</p>
-                                                <p class="mb-2">چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان
-                                                    که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع
-                                                    با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                                <!-- Like and dislike button -->
-                                                <div class="btn-group" role="group"
-                                                     aria-label="Basic radio toggle button group">
-                                                    <!-- Like button -->
-                                                    <input type="radio" class="btn-check" name="btnradio"
-                                                           id="btnradio3">
-                                                    <label class="btn btn-outline-light btn-sm mb-0" for="btnradio3"><i
-                                                            class="far fa-thumbs-up me-1"></i>25</label>
-                                                    <!-- Dislike button -->
-                                                    <input type="radio" class="btn-check" name="btnradio"
-                                                           id="btnradio4">
-                                                    <label class="btn btn-outline-light btn-sm mb-0" for="btnradio4"> <i
-                                                            class="far fa-thumbs-down me-1"></i>2</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Review item END -->
-                                        <!-- Divider -->
                                         <hr>
                                     </div>
                                     <!-- Student review END -->
 
-                                    <!-- Leave Review START -->
-                                    <div class="mt-2">
-                                        <h5 class="mb-4">ثبت دیدگاه</h5>
-                                        <form class="row g-3">
-                                            <!-- Name -->
-                                            <div class="col-md-6 bg-light-input">
-                                                <input type="text" class="form-control" id="inputtext" placeholder="نام"
-                                                       aria-label="First name">
-                                            </div>
-                                            <!-- Email -->
-                                            <div class="col-md-6 bg-light-input">
-                                                <input type="email" class="form-control" placeholder="ایمیل"
-                                                       id="inputEmail4">
-                                            </div>
-                                            <!-- Rating -->
-                                            <div class="col-12 bg-light-input">
-                                                <select id="inputState2" class="form-select js-choice">
-                                                    <option selected="">★★★★★ (5/5)</option>
-                                                    <option>★★★★☆ (4/5)</option>
-                                                    <option>★★★☆☆ (3/5)</option>
-                                                    <option>★★☆☆☆ (2/5)</option>
-                                                    <option>★☆☆☆☆ (1/5)</option>
-                                                </select>
-                                            </div>
-                                            <!-- Message -->
-                                            <div class="col-12 bg-light-input">
-                                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                    @auth
+                                        <!-- Leave Review START -->
+                                        <div class="mt-2">
+                                            <h5 class="mb-4">ثبت دیدگاه</h5>
+                                            <form class="row g-3">
+                                                <!-- Rating -->
+                                                <div class="col-12 bg-light-input">
+                                                    <select wire:model="stars" id="inputState2" class="form-select js-choice">
+                                                        <option>انتخاب کنید</option>
+                                                        <option value="5">★★★★★ (5/5)</option>
+                                                        <option value="4">★★★★☆ (4/5)</option>
+                                                        <option value="3">★★★☆☆ (3/5)</option>
+                                                        <option value="2">★★☆☆☆ (2/5)</option>
+                                                        <option value="1">★☆☆☆☆ (1/5)</option>
+                                                    </select>
+                                                    @error('stars')
+                                                    <p class="alert alert-danger">{{$message}}</p>
+                                                    @enderror
+                                                </div>
+                                                <!-- Message -->
+                                                <div class="col-12 bg-light-input">
+                                                <textarea wire:model="text" class="form-control" id="exampleFormControlTextarea1"
                                                           placeholder="دیدگاه خود را بنویسید" rows="3"></textarea>
-                                            </div>
-                                            <!-- Button -->
-                                            <div class="col-12">
-                                                <button type="submit" class="btn btn-primary mb-0">ثبت دیدگاه</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- Leave Review END -->
+                                                    @error('text')
+                                                    <p class="alert alert-danger">{{$message}}</p>
+                                                    @enderror
+                                                </div>
+                                                <!-- Button -->
+                                                <div class="col-12">
+                                                    <button wire:click.prevent="saveComment" type="submit" class="btn btn-primary mb-0">ثبت دیدگاه</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- Leave Review END -->
+                                    @endauth
+                                    @guest
+                                        <h3>برای ثبت نظر باید به سایت وارد شوید</h3>
+                                    @endguest
 
                                 </div>
                                 <!-- Content END -->

@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('course_id')->constrained('courses');
             $table->text('text');
-            $table->integer('like');
-            $table->integer('dislike');
+            $table->integer('like')->default(0);
+            $table->integer('dislike')->default(0);
+            $table->float('stars')->default(0);
             $table->string('status')->default(\Modules\Course\app\Enums\CourseCommentStatus::Draft->value);
             $table->timestamps();
         });

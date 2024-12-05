@@ -23,6 +23,7 @@ class CourseComment extends Model
         'like',
         'dislike',
         'status',
+        'stars',
     ];
 
     public function user(): BelongsTo
