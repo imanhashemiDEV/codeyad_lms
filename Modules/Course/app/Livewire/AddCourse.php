@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Category\Models\Category;
-use Modules\Course\app\Enums\CourseStatus;
+use Modules\Course\app\Enums\CourseCommentStatus;
 use Modules\Course\Models\Course;
 use Modules\Panel\app\Helpers\Helper;
 
@@ -50,7 +50,7 @@ class AddCourse extends Component
             'price'=>$this->price,
             'description'=>$this->description,
             'level'=>$this->level['value'],
-            'status'=>CourseStatus::Draft->value,
+            'status'=>CourseCommentStatus::Draft->value,
             'video'=>$video_name,
             'image'=>$image_name
         ]);

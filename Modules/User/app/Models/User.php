@@ -4,8 +4,10 @@ namespace Modules\User\app\Models;
 
  use Illuminate\Contracts\Auth\MustVerifyEmail;
  use Illuminate\Database\Eloquent\Factories\HasFactory;
+ use Illuminate\Database\Eloquent\Relations\HasMany;
  use Illuminate\Foundation\Auth\User as Authenticatable;
  use Illuminate\Notifications\Notifiable;
+ use Modules\Comment\Models\CourseComment;
  use Spatie\Permission\Traits\HasRoles;
 
  class User extends Authenticatable implements MustVerifyEmail
@@ -44,5 +46,11 @@ namespace Modules\User\app\Models;
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+     public function comments(): HasMany
+     {
+         return $this->hasMany(CourseComment::class);
     }
 }

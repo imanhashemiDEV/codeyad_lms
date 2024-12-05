@@ -7,5 +7,6 @@
     "Course": true,
     "HomePage": true,
     "CourseListPage": true,
-    "CourseDetailsPage": true
+    "CourseDetailsPage": true,
+    "Comment": true
 }

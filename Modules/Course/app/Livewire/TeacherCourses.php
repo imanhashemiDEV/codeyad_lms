@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Course\app\Enums\CourseStatus;
+use Modules\Course\app\Enums\CourseCommentStatus;
 use Modules\Course\Models\Course;
 
 class TeacherCourses extends Component

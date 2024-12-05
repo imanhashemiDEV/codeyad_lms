@@ -55,15 +55,16 @@
                             </td>
                             <td>{{ \Hekmatinasser\Verta\Verta::instance($course->created_at)->format('%B %d، %Y') }}</td>
                             <td>
-                                @if($course->status === \Modules\Course\app\Enums\CourseStatus::Active->value)
-                                    <a href="{{route('panel.course_details',$course->id)}}" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">افزودن قسمت</a>
-                                    @elseif($course->status == \Modules\Course\app\Enums\CourseStatus::Draft->value)
-                                        <a href="#"  class="btn btn-sm btn-info me-1 mb-1 mb-md-0">پیش نویس</a>
-                                    @elseif($course->status == \Modules\Course\app\Enums\CourseStatus::Rejected->value)
-                                        <a href="#"  class="btn btn-sm btn-danger me-1 mb-1 mb-md-0">رد شده</a>
-                                    @elseif($course->status == \Modules\Course\app\Enums\CourseStatus::Archived->value)
-                                        <a href="#"  class="btn btn-sm btn-warning me-1 mb-1 mb-md-0">آرشیو</a>
-                                    @endif
+                                @if($course->status === \Modules\Course\app\Enums\CourseCommentStatus::Active->value)
+                                    <a href="{{route('panel.course_details',$course->id)}}"
+                                       class="btn btn-sm btn-success me-1 mb-1 mb-md-0">افزودن قسمت</a>
+                                @elseif($course->status == \Modules\Course\app\Enums\CourseCommentStatus::Draft->value)
+                                    <a href="#" class="btn btn-sm btn-info me-1 mb-1 mb-md-0">پیش نویس</a>
+                                @elseif($course->status == \Modules\Course\app\Enums\CourseCommentStatus::Rejected->value)
+                                    <a href="#" class="btn btn-sm btn-danger me-1 mb-1 mb-md-0">رد شده</a>
+                                @elseif($course->status == \Modules\Course\app\Enums\CourseCommentStatus::Archived->value)
+                                    <a href="#" class="btn btn-sm btn-warning me-1 mb-1 mb-md-0">آرشیو</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

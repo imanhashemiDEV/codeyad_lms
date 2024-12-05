@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Modules\Course\app\Enums\CourseStatus;
+use Modules\Course\app\Enums\CourseCommentStatus;
 use Modules\Course\Models\Course;
 use Modules\User\app\Models\User;
 
@@ -20,21 +20,21 @@ class Courses extends Component
     public function changeCourseStatus($course_id)
     {
         $course = Course::query()->findOrFail($course_id);
-        if($course->status == CourseStatus::Draft->value){
+        if($course->status == CourseCommentStatus::Draft->value){
             $course->update([
-                'status' => CourseStatus::Active->value
+                'status' => CourseCommentStatus::Active->value
             ]);
-        }else if($course->status == CourseStatus::Active->value){
+        }else if($course->status == CourseCommentStatus::Active->value){
             $course->update([
-                'status' => CourseStatus::Rejected->value
+                'status' => CourseCommentStatus::Rejected->value
             ]);
-        }else if($course->status == CourseStatus::Rejected->value){
+        }else if($course->status == CourseCommentStatus::Rejected->value){
             $course->update([
-                'status' => CourseStatus::Archived->value
+                'status' => CourseCommentStatus::Archived->value
             ]);
-        }else if($course->status == CourseStatus::Archived->value){
+        }else if($course->status == CourseCommentStatus::Archived->value){
             $course->update([
-                'status' => CourseStatus::Draft->value
+                'status' => CourseCommentStatus::Draft->value
             ]);
         }
     }

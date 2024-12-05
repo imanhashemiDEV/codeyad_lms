@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Category\Models\Category;
-use Modules\Course\app\Enums\CourseStatus;
+use Modules\Course\app\Enums\CourseCommentStatus;
 use Modules\Course\Models\Course;
 
 class CourseList extends Component
@@ -38,7 +38,7 @@ class CourseList extends Component
     public function courses():Paginator
     {
         return Course::query()
-            ->where('status',CourseStatus::Active->value)
+            ->where('status',CourseCommentStatus::Active->value)
             ->where('title','like','%'. $this->search .'%')
             ->when($this->sort==='newest',function ($q){
                 $q->orderBy('created_at','DESC');

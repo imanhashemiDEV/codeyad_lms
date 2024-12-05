@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Modules\Category\Models\Category;
+use Modules\Comment\Models\CourseComment;
 use Modules\Course\Database\factories\CourseFactory;
 use Modules\User\app\Models\User;
 
@@ -53,6 +54,10 @@ class Course extends Model
         return $this->hasManyThrough(Lesson::class, Season::class);
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(CourseComment::class);
+    }
 
     public function courseLevelTranslator($level)
     {

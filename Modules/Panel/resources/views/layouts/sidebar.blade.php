@@ -43,6 +43,10 @@
                     <a  href="{{route('panel.teacher_courses')}}" class="nav-link active">
                         <i class="bi bi-person fa-fw me-2"></i>دوره های مدرس</a>
                 </li>
+                <li class="nav-item">
+                    <a  href="{{route('panel.course.comments')}}" class="nav-link active">
+                        <i class="bi bi-person fa-fw me-2"></i>نظرات دوره</a>
+                </li>
 
             </ul>
             <!-- Sidebar menu end -->

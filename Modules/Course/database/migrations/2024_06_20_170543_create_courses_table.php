@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Modules\Course\app\Enums\CourseStatus;
+use Modules\Course\app\Enums\CourseCommentStatus;
 
 return new class extends Migration
 {
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('discount')->default(0);
             $table->text('description')->nullable();
             $table->string('level');
-            $table->string('status')->default(CourseStatus::Draft->value);
+            $table->string('status')->default(CourseCommentStatus::Draft->value);
             $table->string('video')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
