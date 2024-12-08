@@ -270,7 +270,7 @@
                                         <div class="col-md-4 mb-3 mb-md-0">
                                             <div class="text-center">
                                                 <!-- Info -->
-                                                <h2 class="mb-0">4.5</h2>
+                                                <h2 class="mb-0">{{$this->comments()->avg('stars')}}</h2>
                                                 <!-- Star -->
                                                 <ul class="list-inline mb-0">
                                                     <li class="list-inline-item me-0"><i
@@ -428,58 +428,58 @@
                                     <!-- Student review START -->
                                     <div class="row">
                                         <!-- Review item START -->
-                                        <div class="d-md-flex my-4">
-                                            <!-- Avatar -->
-                                            <div class="avatar avatar-xl me-4 flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/09.jpg')}}"
-                                                     alt="avatar">
-                                            </div>
-                                            <!-- Text -->
-                                            <div>
-                                                <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
-                                                    <h5 class="me-3 mb-0 fw-normal">نیلوفر سجادی</h5>
-                                                    <!-- Review star -->
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="fas fa-star text-warning"></i></li>
-                                                        <li class="list-inline-item me-0"><i
-                                                                class="far fa-star text-warning"></i></li>
-                                                    </ul>
+                                        @foreach($this->comments as $comment)
+                                            <div class="d-md-flex my-4">
+                                                <!-- Avatar -->
+                                                <div class="avatar avatar-xl me-4 flex-shrink-0">
+                                                    <img class="avatar-img rounded-circle" src="{{url('assets/images/avatar/09.jpg')}}"
+                                                         alt="avatar">
                                                 </div>
-                                                <!-- Info -->
-                                                <p class="small mb-2">2 روز قبل</p>
-                                                <p class="mb-2">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
-                                                    چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و
-                                                    مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-                                                    نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                                <!-- Like and dislike button -->
-                                                <div class="btn-group" role="group"
-                                                     aria-label="Basic radio toggle button group">
-                                                    <!-- Like button -->
-                                                    <input type="radio" class="btn-check" name="btnradio"
-                                                           id="btnradio1">
-                                                    <label class="btn btn-outline-light btn-sm mb-0" for="btnradio1"><i
-                                                            class="far fa-thumbs-up me-1"></i>25</label>
-                                                    <!-- Dislike button -->
-                                                    <input type="radio" class="btn-check" name="btnradio"
-                                                           id="btnradio2">
-                                                    <label class="btn btn-outline-light btn-sm mb-0" for="btnradio2"> <i
-                                                            class="far fa-thumbs-down me-1"></i>2</label>
+                                                <!-- Text -->
+                                                <div>
+                                                    <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
+                                                        <h5 class="me-3 mb-0 fw-normal">{{$comment->user->name}}</h5>
+                                                        <!-- Review star -->
+                                                        <ul class="list-inline mb-0">
+                                                            @for($i=0; $i< $comment->stars; $i++)
+                                                                <li class="list-inline-item me-0"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                            @endfor
+                                                            @for($i=0; $i< 5- $comment->stars; $i++)
+                                                            <li class="list-inline-item me-0"><i
+                                                                    class="far fa-star text-warning"></i></li>
+                                                             @endfor
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Info -->
+                                                    <p class="small mb-2">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->formatDifference()}}</p>
+                                                    <p class="mb-2">{{$comment->text}}</p>
+                                                    <!-- Like and dislike button -->
+                                                    <div class="btn-group" role="group"
+                                                         aria-label="Basic radio toggle button group">
+                                                        <!-- Like button -->
+                                                        <input wire:click="likeComment({{$comment->id}})" type="radio" class="btn-check" name="btnradio"
+                                                               id="btnradio1">
+                                                        <label class="btn btn-outline-light btn-sm mb-0" for="btnradio1"><i
+                                                                class="far fa-thumbs-up me-1"></i>{{$comment->like}}</label>
+                                                        <!-- Dislike button -->
+                                                        <input type="radio" class="btn-check" name="btnradio"
+                                                               id="btnradio2">
+                                                        <label class="btn btn-outline-light btn-sm mb-0" for="btnradio2"> <i
+                                                                class="far fa-thumbs-down me-1"></i>{{$comment->dislike}}</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <hr>
+                                        @endforeach
 
-                                        <hr>
                                     </div>
                                     <!-- Student review END -->
 
                                     @auth
+                                        @if(session()->has('message'))
+                                            <p class="alert alert-success">{{session('message')}}</p>
+                                        @endif
                                         <!-- Leave Review START -->
                                         <div class="mt-2">
                                             <h5 class="mb-4">ثبت دیدگاه</h5>

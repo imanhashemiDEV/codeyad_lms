@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('course_comments', function (Blueprint $table) {
+        Schema::create('user_comment_votes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('course_id')->constrained('courses');
-            $table->text('text');
-            $table->integer('like')->default(0);
-            $table->integer('dislike')->default(0);
-            $table->float('stars')->default(0);
-            $table->string('status')->default(\Modules\Comment\app\Enums\CourseCommentStatus::Draft->value);
+            $table->foreignId('course_comment_id')->constrained('course_comments');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_comments');
+        Schema::dropIfExists('user_comment_votes');
     }
 };

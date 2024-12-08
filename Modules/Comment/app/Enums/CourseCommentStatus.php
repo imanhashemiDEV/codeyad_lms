@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Course\app\Enums;
+namespace Modules\Comment\app\Enums;
 
 enum CourseCommentStatus:string
 {
