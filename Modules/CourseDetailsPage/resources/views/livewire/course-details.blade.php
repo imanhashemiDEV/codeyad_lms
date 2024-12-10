@@ -455,19 +455,21 @@
                                                     <p class="small mb-2">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->formatDifference()}}</p>
                                                     <p class="mb-2">{{$comment->text}}</p>
                                                     <!-- Like and dislike button -->
-                                                    <div class="btn-group" role="group"
-                                                         aria-label="Basic radio toggle button group">
-                                                        <!-- Like button -->
-                                                        <input wire:click="likeComment({{$comment->id}})" type="radio" class="btn-check" name="btnradio"
-                                                               id="btnradio1">
-                                                        <label class="btn btn-outline-light btn-sm mb-0" for="btnradio1"><i
-                                                                class="far fa-thumbs-up me-1"></i>{{$comment->like}}</label>
-                                                        <!-- Dislike button -->
-                                                        <input type="radio" class="btn-check" name="btnradio"
-                                                               id="btnradio2">
-                                                        <label class="btn btn-outline-light btn-sm mb-0" for="btnradio2"> <i
-                                                                class="far fa-thumbs-down me-1"></i>{{$comment->dislike}}</label>
-                                                    </div>
+                                                    @auth
+                                                        <div class="btn-group" role="group"
+                                                             aria-label="Basic radio toggle button group">
+                                                            <!-- Like button -->
+                                                            <input type="radio" class="btn-check" name="btnradio{{$comment->id}}"
+                                                                   id="btnradio{{$comment->id}}">
+                                                            <label wire:click="likeComment({{$comment->id}})" class="btn btn-outline-light btn-sm mb-0" for="btnradio{{$comment->id}}"><i
+                                                                    class="far fa-thumbs-up me-1"></i>{{$comment->like}}</label>
+                                                            <!-- Dislike button -->
+                                                            <input type="radio" class="btn-check" name="btnradio{{$comment->id}}"
+                                                                   id="btnradio{{$comment->id}}">
+                                                            <label wire:click="dislikeComment({{$comment->id}})" class="btn btn-outline-light btn-sm mb-0" for="btnradio{{$comment->id}}"> <i
+                                                                    class="far fa-thumbs-down me-1"></i>{{$comment->dislike}}</label>
+                                                        </div>
+                                                    @endauth
                                                 </div>
                                             </div>
                                             <hr>

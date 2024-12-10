@@ -11,6 +11,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Modules\Comment\app\Enums\CommentVoteType;
+use Modules\Comment\app\Enums\CourseCommentStatus;
 use Modules\Comment\Models\CourseComment;
 use Modules\Comment\Models\UserCommentVote;
 use Modules\Course\Models\Course;
@@ -67,7 +68,9 @@ class CourseDetails extends Component
         $check = UserCommentVote::query()
             ->where('user_id',auth()->user()->id)
             ->where('course_comment_id',$comment_id)->first();
+
         if ($check) {
+
             if($check->type===CommentVoteType::Dislike->value){
                 $check->update([
                     'type'=>CommentVoteType::Like->value
@@ -88,7 +91,10 @@ class CourseDetails extends Component
     #[Computed]
     public function comments(): Collection|array
     {
-        return CourseComment::query()->where('course_id', $this->course->id)->get();
+        return CourseComment::query()
+            ->where('course_id', $this->course->id)
+            ->where('status', CourseCommentStatus::Accepted->value)
+            ->get();
     }
 
     #[Layout('homepage::layouts.master'),Title('صفحه جزئیات دوره')]
