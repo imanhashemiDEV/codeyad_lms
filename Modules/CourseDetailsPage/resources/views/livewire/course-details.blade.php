@@ -836,19 +836,11 @@
                         <div class="col-md-6 col-lg-12">
                             <!-- Video START -->
                             <div class="card shadow p-2 mb-4 z-index-9">
-                                <div class="overflow-hidden rounded-3">
-                                    <img src="{{url('images/courses/'.$course->id.'/'. $course->image)}}" class="card-img" alt="course image">
-                                    <!-- Overlay -->
-                                    <div class="bg-overlay bg-dark opacity-6"></div>
-                                    <div class="card-img-overlay d-flex align-items-start flex-column p-3">
-                                        <!-- Video button and link -->
-                                        <div class="m-auto">
-                                            <a href="https://www.aparat.com/video/video/embed/videohash/31hor/vt/frame"
-                                               class="btn btn-lg text-danger btn-round btn-white-shadow mb-0"
-                                               data-glightbox="" data-gallery="course-video">
-                                                <i class="fas fa-play"></i>
-                                            </a>
-                                        </div>
+                                <div class=" overflow-hidden rounded-3">
+                                    <div class="m-auto w-100">
+                                        <video poster="{{url('images/courses/'.$course->id.'/'. $course->image)}}" class="video-js w-100" controls preload="auto" data-setup="{}" height="200">
+                                            <source  src="{{url('videos/courses/'. $course->id .'/intro/'. $course->video)}}" type="video/mp4">
+                                        </video>
                                     </div>
                                 </div>
 
@@ -1275,3 +1267,8 @@
     Listed courses END -->
 
 </main>
+
+@assets
+<link rel="stylesheet" href="{{url('assets/vendor/videojs/video-js.css')}}">
+<script src="{{url('assets/vendor/videojs/video.min.js')}}"></script>
+@endassets

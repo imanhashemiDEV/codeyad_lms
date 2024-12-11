@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Category\Models\Category;
-use Modules\Course\app\Enums\CourseCommentStatus;
+use Modules\Comment\app\Enums\CourseCommentStatus;
 use Modules\Course\Models\Course;
 use Modules\Panel\app\Helpers\Helper;
 
