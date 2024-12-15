@@ -7,6 +7,7 @@ namespace Modules\User\app\Models;
  use Illuminate\Database\Eloquent\Relations\HasMany;
  use Illuminate\Foundation\Auth\User as Authenticatable;
  use Illuminate\Notifications\Notifiable;
+ use Modules\Cart\Models\Cart;
  use Modules\Comment\Models\CourseComment;
  use Spatie\Permission\Traits\HasRoles;
 
@@ -48,9 +49,13 @@ namespace Modules\User\app\Models;
         ];
     }
 
-
      public function comments(): HasMany
      {
          return $this->hasMany(CourseComment::class);
+    }
+
+     public function carts(): HasMany
+     {
+        return $this->hasMany(Cart::class);
     }
 }

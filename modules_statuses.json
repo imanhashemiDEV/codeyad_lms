@@ -8,5 +8,6 @@
     "HomePage": true,
     "CourseListPage": true,
     "CourseDetailsPage": true,
-    "Comment": true
+    "Comment": true,
+    "Cart": true
 }
