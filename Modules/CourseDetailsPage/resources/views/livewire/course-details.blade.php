@@ -885,8 +885,12 @@
 
                                     <!-- Buttons -->
                                     <div class="mt-3 d-sm-flex justify-content-sm-between">
-                                        <a href="#" class="btn btn-outline-primary mb-0">پیش نمایش</a>
-                                        <a href="{{route('user.cart')}}" class="btn btn-success mb-0">خرید دوره</a>
+                                        @auth
+                                            <a href="#" wire:click="buyCourse" class="btn btn-success mb-0">خرید دوره</a>
+                                        @endauth
+                                        @guest
+                                                <a href="{{route('login')}}" class="btn btn-outline-primary mb-0">برای خرید دوره لطفا وارد شوید</a>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>

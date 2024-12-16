@@ -35,16 +35,6 @@
                 <!-- Main content START -->
                 <div class="col-lg-8 mb-4 mb-sm-0">
                     <div class="card card-body p-4 shadow">
-                        <!-- Alert -->
-                        <div class="alert alert-danger alert-dismissible d-flex justify-content-between align-items-center fade show py-3 pe-2" role="alert">
-                            <div>
-                                <span class="fs-5 me-1">🔥</span>
-                                این دوره ها با تخفیف محدود هستند، لطفاً<strong class="text-danger ms-1"> تا 2 روز آینده </strong> تسویه حساب کنید.
-                            </div>
-                            <button type="button" class="btn btn-link mb-0 text-primary-hover text-end" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x-lg"></i></button>
-                        </div>
-
-
 
                         <div class="table-responsive border-0 rounded-3">
                             <!-- Table START -->
@@ -52,59 +42,42 @@
                                 <!-- Table head -->
                                 <!-- Table body START -->
                                 <tbody class="border-top-0">
-                                <!-- Table item -->
                                 <tr>
-                                    <!-- Course item -->
-                                    <td>
-                                        <div class="d-lg-flex align-items-center">
-                                            <!-- Image -->
-                                            <div class="w-100px w-md-80px mb-2 mb-md-0">
-                                                <img src="assets/images/courses/4by3/08.jpg" class="rounded" alt="">
-                                            </div>
-                                            <!-- Title -->
-                                            <h6 class="mb-0 ms-lg-3 mt-2 mt-lg-0">
-                                                <a href="#">دوره جامع آموزش Sketch</a>
-                                            </h6>
-                                        </div>
-                                    </td>
-
-                                    <!-- Amount item -->
-                                    <td class="text-center">
-                                        <h5 class="text-success mb-0">105,000 تومان</h5>
-                                    </td>
-                                    <!-- Action item -->
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-success-soft px-2 me-1 mb-1 mb-md-0"><i class="far fa-fw fa-edit"></i></a>
-                                        <button class="btn btn-sm btn-danger-soft px-2 mb-0"><i class="fas fa-fw fa-times"></i></button>
-                                    </td>
+                                    <th class="text-center">عکس دوره</th>
+                                    <th class="text-center">عنوان دوره</th>
+                                    <th class="text-center">قیمت دوره</th>
+                                    <th class="text-center">قیمت با تخفیف</th>
+                                    <th class="text-center">عملیات</th>
                                 </tr>
-
                                 <!-- Table item -->
-                                <tr>
-                                    <!-- Course item -->
-                                    <td>
-                                        <div class="d-lg-flex align-items-center">
-                                            <!-- Image -->
-                                            <div class="w-100px w-md-80px mb-2 mb-md-0">
-                                                <img src="assets/images/courses/4by3/10.jpg" class="rounded" alt="">
-                                            </div>
-                                            <!-- Title -->
+                                @foreach($carts as $cart)
+                                    <tr>
+                                        <!-- Course item -->
+                                        <td>
+                                                <div class="w-100px w-md-80px mb-2 mb-md-0">
+                                                    <img src="{{url('images/courses/'.$cart->course->id.'/'. $cart->course->image)}}" class="rounded" alt="">
+                                                </div>
+                                        </td>
+                                        <td class="text-center">
                                             <h6 class="mb-0 ms-lg-3 mt-2 mt-lg-0">
-                                                <a href="#">دوره جامع آموزش Bootstrap</a>
+                                                <a href="{{route('course.details', $cart->course->id)}}">{{$cart->course->title}}</a>
                                             </h6>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        <!-- Amount item -->
+                                        <td class="text-center">
+                                            <h5 class="text-success mb-0">{{$cart->course->price}} تومان</h5>
+                                        </td>
+                                        <td class="text-center">
+                                            <h5 class="text-success mb-0">{{ $cart->course->price - (($cart->course->price * $cart->course->discount ) / 100) }} تومان</h5>
+                                        </td>
+                                        <!-- Action item -->
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-success-soft px-2 me-1 mb-1 mb-md-0"><i class="far fa-fw fa-edit"></i></a>
+                                            <button class="btn btn-sm btn-danger-soft px-2 mb-0"><i class="fas fa-fw fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-                                    <!-- Amount item -->
-                                    <td class="text-center">
-                                        <h5 class="text-success mb-0">599,000 تومان</h5>
-                                    </td>
-                                    <!-- Action item -->
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-success-soft px-2 me-1 mb-1 mb-md-0"><i class="far fa-fw fa-edit"></i></a>
-                                        <button class="btn btn-sm btn-danger-soft px-2 mb-0"><i class="fas fa-fw fa-times"></i></button>
-                                    </td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -4,12 +4,14 @@ namespace Modules\CourseDetailsPage\Livewire;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Renderless;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Modules\Cart\Models\Cart;
 use Modules\Comment\app\Enums\CommentVoteType;
 use Modules\Comment\app\Enums\CourseCommentStatus;
 use Modules\Comment\Models\CourseComment;
@@ -18,6 +20,8 @@ use Modules\Course\Models\Course;
 
 class CourseDetails extends Component
 {
+
+    use LivewireAlert;
     public Course $course;
 
     #[Validate('required')]
@@ -34,7 +38,10 @@ class CourseDetails extends Component
             'text' => $this->text,
             'stars'=>$this->stars,
         ]);
-        session()->flash('message','نظر شما ثبت شد و بعد از تایید ادمین نمایش داده می شود');
+       // session()->flash('message','نظر شما ثبت شد و بعد از تایید ادمین نمایش داده می شود');
+
+        $this->rest('text','stars');
+        $this->alert('success', 'نظر شما ثبت شد و بعد از تایید ادمین نمایش داده می شود');
     }
 
     public function likeComment($comment_id): void
@@ -86,6 +93,19 @@ class CourseDetails extends Component
             ]);
             $comment->increment('like');
         }
+    }
+
+    public function buyCourse(): void
+    {
+        $exists = Cart::query()->where('user_id',auth()->user()->id)
+            ->where('course_id', $this->course->id)->exists();
+        if (!$exists) {
+            Cart::query()->create([
+                'user_id'=>auth()->user()->id,
+                'course_id'=> $this->course->id
+            ]);
+        }
+        $this->redirectRoute('user.cart');
     }
 
     #[Computed]
