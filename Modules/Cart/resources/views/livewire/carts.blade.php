@@ -72,8 +72,7 @@
                                         </td>
                                         <!-- Action item -->
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-success-soft px-2 me-1 mb-1 mb-md-0"><i class="far fa-fw fa-edit"></i></a>
-                                            <button class="btn btn-sm btn-danger-soft px-2 mb-0"><i class="fas fa-fw fa-times"></i></button>
+                                            <button wire:click="deleteCartCourse({{$cart->id}})" class="btn btn-sm btn-danger-soft px-2 mb-0"><i class="fas fa-fw fa-times"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -110,15 +109,15 @@
                         <ul class="list-group list-group-borderless mb-2">
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="h6 fw-light mb-0">قیمت</span>
-                                <span class="h6 fw-light mb-0 fw-bold">850,000 تومان</span>
+                                <span class="h6 fw-light mb-0 fw-bold">{{$total_price}}  تومان </span>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
-                                <span class="h6 fw-light mb-0">کد تخفیف</span>
-                                <span class="text-danger">20%</span>
+                                <span class="h6 fw-light mb-0">میزان تخفیف</span>
+                                <span class="text-danger">{{$total_discount}}  تومان </span>
                             </li>
                             <li class="list-group-item px-0 d-flex justify-content-between">
                                 <span class="h5 mb-0">قیمت نهایی</span>
-                                <span class="h5 mb-0">500,000 تومان</span>
+                                <span class="h5 mb-0">{{$total_price - $total_discount}}  تومان </span>
                             </li>
                         </ul>
 

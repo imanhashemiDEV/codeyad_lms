@@ -2,6 +2,7 @@
 
 namespace Modules\Auth\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
@@ -23,13 +24,12 @@ class Login extends Component
        if(auth()->attempt(['email'=>$this->email,'password'=>$this->password],$this->remember)){
            $user = User::query()->where('email',$this->email)->first();
            Auth::login($user);
-           return redirect()->route('panel.index');
-       }else{
-           session()->flash('message','اطلاعات وارد شده صحیح نمی باشد');
+           return redirect()->route('home');
        }
+        session()->flash('message', 'اطلاعات وارد شده صحیح نمی باشد');
     }
     #[Layout('auth::layouts.app'),Title('ورود')]
-    public function render()
+    public function render():View
     {
         return view('auth::livewire.login');
     }
