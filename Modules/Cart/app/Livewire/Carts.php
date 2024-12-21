@@ -13,7 +13,7 @@ class Carts extends Component
 {
     use LivewireAlert;
 
-    public function deleteCartCourse($cart_id)
+    public function deleteCartCourse($cart_id): void
     {
         Cart::destroy($cart_id);
         $this->alert('success', 'دوره از سبد شما حذف شد');
@@ -21,7 +21,8 @@ class Carts extends Component
     #[Layout('homepage::layouts.master'),Title('صفحه سبد خرید')]
     public function render():View
     {
-        $carts =  Cart::query()->where('user_id', auth()->user()->id)->get();
+        $carts =  Cart::query()->where('user_id', auth()->user()->id)
+            ->get();
         $total_price=0;
         $total_discount= 0;
 

@@ -9,5 +9,6 @@
     "CourseListPage": true,
     "CourseDetailsPage": true,
     "Comment": true,
-    "Cart": true
+    "Cart": true,
+    "Coupon": true
 }

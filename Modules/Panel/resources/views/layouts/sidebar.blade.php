@@ -47,6 +47,10 @@
                     <a  href="{{route('panel.course.comments')}}" class="nav-link active">
                         <i class="bi bi-person fa-fw me-2"></i>نظرات دوره</a>
                 </li>
+                <li class="nav-item">
+                    <a  href="{{route('panel.coupons')}}" class="nav-link active">
+                        <i class="bi bi-person fa-fw me-2"></i>تخفیفات</a>
+                </li>
 
             </ul>
             <!-- Sidebar menu end -->
