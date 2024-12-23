@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('coupon_code');
             $table->integer('coupon_percent');
+            $table->string('status')->default(\Modules\Coupon\app\Enums\CouponStatus::Active->value);
             $table->timestamps();
         });
     }

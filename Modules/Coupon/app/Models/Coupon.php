@@ -8,7 +8,6 @@ use Modules\Coupon\Database\factories\CouponFactory;
 
 class Coupon extends Model
 {
-    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +15,8 @@ class Coupon extends Model
     protected $fillable = [
         'title',
         'coupon_code',
-        'coupon_percent'
+        'coupon_percent',
+        'status'
     ];
 
     protected static function newFactory()
