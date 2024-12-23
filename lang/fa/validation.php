@@ -207,6 +207,7 @@ return [
         'gift_price'=>'قیمت کارت هدیه',
         'expiration_date'=>'تاریخ انقضا',
         'stars'=>'امتیاز ستاره ای',
+        'coupon_percent'=>'درصد تخفیف',
 
 
     ],

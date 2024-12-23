@@ -9,16 +9,22 @@
                 <form class="row g-4">
 
                     <!-- Input item -->
-                    <div class="col-6">
+                    <div class="col-4">
                         <label class="form-label">عنوان کد تخفیف</label>
                         <input wire:model="title" type="text" class="form-control">
+                        @error('title')
+                           <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <label class="form-label"> درصد تخفیف</label>
                         <input wire:model="coupon_percent" type="text" class="form-control">
+                        @error('coupon_percent')
+                           <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
 
-                    <div class="d-sm-flex justify-content-start">
+                    <div class="d-flex align-items-center">
                         @if($editedIndex)
                             <button type="button" class="btn btn-primary mb-0" wire:click="updateRow">ویرایش</button>
                         @else
@@ -71,7 +77,7 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Info -->
                                     <div class="ms-2">
-                                        <h6 class="mb-0 fw-light">{{$coupon->coupon_code}}</h6>
+                                        <h6 class="mb-0 fw-light">{{$coupon->coupon_code}} </h6>
                                     </div>
                                 </div>
                             </td>
@@ -79,22 +85,20 @@
                                 <div class="d-flex align-items-center">
                                     <!-- Info -->
                                     <div class="ms-2">
-                                        <h6 class="mb-0 fw-light">{{$coupon->coupon_percent}}</h6>
+                                        <h6 class="mb-0 fw-light">{{$coupon->coupon_percent}} %</h6>
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <!-- Info -->
-                                    <div class="ms-2">
-                                        <h6 class="mb-0 fw-light">{{$coupon->status}}</h6>
-                                    </div>
-                                </div>
+                            <td wire:click="changeCouponStatus({{$coupon->id}})">
+                                @if($coupon->status == \Modules\Coupon\app\Enums\CouponStatus::Active->value)
+                                    <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">فعال</a>
+                                @elseif($coupon->status == \Modules\Coupon\app\Enums\CouponStatus::Expired->value)
+                                    <a href="#" class="btn btn-sm btn-warning me-1 mb-1 mb-md-0">منقضی شده</a>
+                                @endif
                             </td>
                             <td> {{ \Hekmatinasser\Verta\Verta::instance($coupon->created_at)->format('%B %d، %Y') }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-success me-1 mb-1 mb-md-0" wire:click="editRow({{$coupon->id}})">ویرایش</a>
-                                <button class="btn btn-sm btn-danger mb-0" wire:click="$dispatch('delete-coupon',{id:{{$coupon->id}} })">حذف</button>
                             </td>
                         </tr>
                     @endforeach
@@ -121,28 +125,3 @@
     </div>
     <!-- Card END -->
 </div>
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('delete-coupon', (event) => {
-                Swal.fire({
-                    title: "آیا از حذف مطمئن هستید؟",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "بله!",
-                    cancelButtonText:"خیر"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Livewire.dispatch('destroy-coupon',{id:event.id})
-                        Swal.fire({
-                            title: "حذف انجام شد!",
-                            icon: "success"
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-@endpush

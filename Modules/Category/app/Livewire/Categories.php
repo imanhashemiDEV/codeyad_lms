@@ -47,7 +47,7 @@ class Categories extends Component
         ]);
 
         $this->reset('title', 'parent_id');
-        session()->flash('message', 'دسته بندی ایجاد شد');
+        session()->flash('message', 'دسته بندی ویرایش شد');
         $this->editedIndex=null;
     }
 
