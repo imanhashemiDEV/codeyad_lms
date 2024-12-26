@@ -91,11 +91,17 @@
                         <div class="col-md-6">
                             <label class="form-label">نام فارسی قسمت</label>
                             <input wire:model="lesson_title" class="form-control" type="text" >
+                            @error('lesson_title')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <!-- Video link -->
                         <div class="col-md-6">
                             <label class="form-label">نام انگلیسی قسمت</label>
                             <input wire:model="lesson_e_title" class="form-control" type="text" >
+                            @error('lesson_e_title')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <!-- Description -->
 
@@ -109,6 +115,9 @@
                                 <input wire:model="is_free" value="1" type="radio" class="btn-check" name="options" id="option2">
                                 <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option2">پولی</label>
                             </div>
+                            @error('is_free')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="col-12">

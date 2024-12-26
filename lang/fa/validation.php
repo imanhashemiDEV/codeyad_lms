@@ -208,7 +208,10 @@ return [
         'expiration_date'=>'تاریخ انقضا',
         'stars'=>'امتیاز ستاره ای',
         'coupon_percent'=>'درصد تخفیف',
-
+        'lesson_title'=>'عنوان فارسی قسمت',
+        'lesson_e_title'=>'عنوان انگلیسی',
+        'is_free'=>'پولی یا رایگان',
+        'video'=>'ویدئو',
 
     ],
 ];

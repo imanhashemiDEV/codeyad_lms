@@ -85,13 +85,9 @@
                         <div class="row g-3 mt-2">
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input class="form-control form-control " placeholder="">
-                                    <button type="button" class="btn btn-primary">کد تخفیف</button>
+                                    <input wire:model="coupon_code" class="form-control form-control " placeholder="">
+                                    <button wire:click="checkCoupon" type="button" class="btn btn-primary">اعمال کد تخفیف</button>
                                 </div>
-                            </div>
-                            <!-- Update button -->
-                            <div class="col-md-6 text-md-end">
-                                <button class="btn btn-primary mb-0" disabled>اعمال</button>
                             </div>
                         </div>
                     </div>

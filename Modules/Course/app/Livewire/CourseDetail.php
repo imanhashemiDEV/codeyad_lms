@@ -16,15 +16,8 @@ class CourseDetail extends Component
 {
     use WithFileUploads;
 
-    public $course_id;
-    #[Rule('required')]
-    public $title;
-    public $season_id;
-
-   #[Rule('required')]
-    public $lesson_title,$lesson_e_title,$video,$is_free;
-
-    public $attachment;
+    public $course_id,$title,$season_id,$attachment,
+        $lesson_title,$lesson_e_title,$video,$is_free;
 
     public function mount($course_id)
     {
@@ -33,6 +26,9 @@ class CourseDetail extends Component
 
     public function addSeason()
     {
+        $this->validate([
+            'title'=>'required'
+        ]);
         $season =Season::query()->where('course_id', $this->course_id)->latest()->first();
         if($season){
             Season::query()->create([
@@ -57,8 +53,13 @@ class CourseDetail extends Component
 
     public function AddLesson()
     {
-        $this->validate();
-         if($this->attachment){
+        $this->validate([
+            'lesson_title'=> 'required',
+            'lesson_e_title'=> 'required',
+            'video'=> 'required',
+            'is_free'=> 'required',
+        ]);
+        if($this->attachment){
              $attachment_name = $this->attachment->hashName();
          }
 
@@ -75,7 +76,10 @@ class CourseDetail extends Component
             'is_free'=>$this->is_free ?? false,
         ]);
 
-        $this->attachment->store("attachments/courses/$this->course_id/$this->season_id",'public');
+        if($this->attachment){
+            $this->attachment->store("attachments/courses/$this->course_id/$this->season_id",'public');
+        }
+
         $this->video->store("videos/courses/$this->course_id/$this->season_id",'public');
 
         $this->dispatch('closeLessonModal');
