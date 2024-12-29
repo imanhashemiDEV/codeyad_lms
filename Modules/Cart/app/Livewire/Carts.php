@@ -10,6 +10,8 @@ use Livewire\Component;
 use Modules\Cart\Models\Cart;
 use Modules\Coupon\app\Enums\CouponStatus;
 use Modules\Coupon\Models\Coupon;
+use Shetabit\Multipay\Invoice;
+use Shetabit\Payment\Facade\Payment;
 
 class Carts extends Component
 {
@@ -25,7 +27,7 @@ class Carts extends Component
         $this->alert('success', 'دوره از سبد شما حذف شد');
     }
 
-    public function checkCoupon()
+    public function checkCoupon(): void
     {
         if($this->coupon_code){
             $coupon = Coupon::query()
@@ -39,6 +41,7 @@ class Carts extends Component
             }
         }
     }
+
     #[Layout('homepage::layouts.master'),Title('صفحه سبد خرید')]
     public function render():View
     {

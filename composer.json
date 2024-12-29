@@ -13,6 +13,7 @@
         "livewire/livewire": "^3.4",
         "mhmiton/laravel-modules-livewire": "*",
         "nwidart/laravel-modules": "^11.0",
+        "shetabit/payment": "^5.8",
         "spatie/laravel-permission": "^6.7"
     },
     "require-dev": {
