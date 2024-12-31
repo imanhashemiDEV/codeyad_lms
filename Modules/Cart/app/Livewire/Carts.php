@@ -10,15 +10,15 @@ use Livewire\Component;
 use Modules\Cart\Models\Cart;
 use Modules\Coupon\app\Enums\CouponStatus;
 use Modules\Coupon\Models\Coupon;
-use Shetabit\Multipay\Invoice;
-use Shetabit\Payment\Facade\Payment;
+use Modules\Order\app\Helpers\OrderCodeGenerator;
+use Modules\Order\Models\Order;
 
 class Carts extends Component
 {
     use LivewireAlert;
 
     public $coupon_code;
-    public $total_price;
+    public $total_price,$total_discount;
     public $coupon_discount = 0;
 
     public function deleteCartCourse($cart_id): void
@@ -42,23 +42,34 @@ class Carts extends Component
         }
     }
 
+    public function payment()
+    {
+        $order = Order::query()->create([
+            'user_id'=> auth()->user()->id,
+            'order_code'=> OrderCodeGenerator::generateRandomInteger(6),
+            'total_price'=>$this->total_price,
+            'discount'=>$this->total_discount,
+            'discount_code'=>$this->coupon_code
+        ]);
+    }
+
     #[Layout('homepage::layouts.master'),Title('صفحه سبد خرید')]
     public function render():View
     {
         $carts =  Cart::query()->where('user_id', auth()->user()->id)
             ->get();
         $this->total_price=0;
-        $total_discount= 0;
+        $this->total_discount= 0;
 
          foreach ($carts as $cart) {
              $this->total_price += $cart->course->price;
-             $total_discount += ($cart->course->price * $cart->course->discount)/100;
+             $this->total_discount += ($cart->course->price * $cart->course->discount)/100;
          }
           if(!count($carts)){
               $this->coupon_discount =0;
           }
-         $total_discount += $this->coupon_discount;
+         $this->total_discount += $this->coupon_discount;
 
-        return view('cart::livewire.carts', compact('total_discount', 'carts'));
+        return view('cart::livewire.carts', compact( 'carts'));
     }
 }

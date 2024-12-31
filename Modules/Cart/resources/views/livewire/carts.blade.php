@@ -119,7 +119,7 @@
 
                         <!-- Button -->
                         <div class="d-grid">
-                            <a href="checkout.html" class="btn btn-lg btn-success">تسویه حساب</a>
+                            <a href="#" wire:click="payment" class="btn btn-lg btn-success">تسویه حساب</a>
                         </div>
 
                         <!-- Content -->
