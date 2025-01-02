@@ -3,6 +3,8 @@
 namespace Modules\Cart\Livewire;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -12,6 +14,9 @@ use Modules\Coupon\app\Enums\CouponStatus;
 use Modules\Coupon\Models\Coupon;
 use Modules\Order\app\Helpers\OrderCodeGenerator;
 use Modules\Order\Models\Order;
+use Modules\Order\Models\OrderDetail;
+use Shetabit\Multipay\Invoice;
+use Shetabit\Payment\Facade\Payment;
 
 class Carts extends Component
 {
@@ -44,13 +49,46 @@ class Carts extends Component
 
     public function payment()
     {
-        $order = Order::query()->create([
-            'user_id'=> auth()->user()->id,
-            'order_code'=> OrderCodeGenerator::generateRandomInteger(6),
-            'total_price'=>$this->total_price,
-            'discount'=>$this->total_discount,
-            'discount_code'=>$this->coupon_code
-        ]);
+        DB::beginTransaction();
+        try {
+            $order = Order::query()->create([
+                'user_id'=> auth()->user()->id,
+                'order_code'=> OrderCodeGenerator::generateRandomInteger(6),
+                'total_price'=>$this->total_price,
+                'discount'=>$this->total_discount,
+                'discount_code'=>$this->coupon_code
+            ]);
+
+            $carts =  Cart::query()->where('user_id', auth()->user()->id)
+                ->get();
+            foreach ($carts as $cart){
+                  OrderDetail::query()->create([
+                    'order_id'=>$order->id,
+                    'course_id'=>$cart->course_id,
+                    'price'=>$cart->course->price,
+                    'discount'=>$cart->course->discount,
+                ]);
+            }
+
+            DB::commit();
+
+            $pay_price = $this->total_price - $this->total_discount;
+             $result =  Payment::purchase(
+                (new Invoice)->amount($pay_price),
+                function($driver, $transactionId) use ($order) {
+                    $order->update([
+                        'transaction_id'=>  $transactionId
+                    ]);
+                }
+            )->pay()->toJson();
+            dd(json_decode($result)->action);
+
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::error('ثبت سفارش با خطا مواجه شد ');
+        }
+
+
     }
 
     #[Layout('homepage::layouts.master'),Title('صفحه سبد خرید')]
