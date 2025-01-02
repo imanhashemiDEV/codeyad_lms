@@ -81,11 +81,11 @@ class Carts extends Component
                     ]);
                 }
             )->pay()->toJson();
-            dd(json_decode($result)->action);
+            return $this->redirect(json_decode($result)->action);
 
         }catch (\Exception $exception){
             DB::rollBack();
-            Log::error('ثبت سفارش با خطا مواجه شد ');
+            Log::error($exception->getMessage());
         }
 
 

@@ -11,5 +11,6 @@
     "Comment": true,
     "Cart": true,
     "Coupon": true,
-    "Order": true
+    "Order": true,
+    "Payment": true
 }

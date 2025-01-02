@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('order_code');
             $table->integer('total_price');
             $table->integer('discount')->default(0);
-            $table->integer('discount_code')->nullable();
+            $table->string('discount_code')->nullable();
             $table->string('status')->default(OrderStatus::Draft->value);
             $table->string('transaction_id')->nullable();
             $table->timestamps();

@@ -361,7 +361,7 @@ return [
 
             'mode' => 'sandbox', // can be normal, sandbox, zaringate
             'merchantId' => '1cd832b6-33cc-3u56-86fb-fb2cf25fc23b',
-            'callbackUrl' => 'http://yoursite.com/path/to',
+            'callbackUrl' => 'http://127.0.0.1:8000/payment_callback',
             'description' => 'payment using zarinpal',
             'currency' => 'T', //Can be R, T (Rial, Toman)
         ],
