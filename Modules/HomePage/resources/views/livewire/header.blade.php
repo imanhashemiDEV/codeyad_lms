@@ -118,6 +118,7 @@
                     @endguest
                    @auth
                         <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>پنل کاربری</a></li>
+                        <li><a class="dropdown-item bg-danger-soft-hover" href="{{route('user.cart')}}"><i class="bi bi-shop fa-fw me-2"></i>سبد خرید</a></li>
                         <li><a class="dropdown-item bg-danger-soft-hover" href="{{route('logout')}}"><i class="bi bi-power fa-fw me-2"></i>خروج</a></li>
                    @endauth
                     <li> <hr class="dropdown-divider"></li>

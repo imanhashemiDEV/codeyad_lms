@@ -12,5 +12,6 @@
     "Cart": true,
     "Coupon": true,
     "Order": true,
-    "Payment": true
+    "Payment": true,
+    "Student": true
 }
