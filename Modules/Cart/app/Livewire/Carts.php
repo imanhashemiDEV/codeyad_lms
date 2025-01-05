@@ -81,6 +81,12 @@ class Carts extends Component
                     ]);
                 }
             )->pay()->toJson();
+
+            $carts =  Cart::query()->where('user_id', auth()->user()->id)
+                ->get();
+            foreach ($carts as $cart){
+                $cart->delete();
+            }
             return $this->redirect(json_decode($result)->action);
 
         }catch (\Exception $exception){

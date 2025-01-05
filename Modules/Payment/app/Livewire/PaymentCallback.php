@@ -3,6 +3,8 @@
 namespace Modules\Payment\Livewire;
 
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Modules\Order\app\Enums\OrderStatus;
@@ -14,22 +16,23 @@ class PaymentCallback extends Component
     public $Authority;
     #[Url]
     public $Status;
+    public $order;
 
     public function mount()
     {
-        $order = Order::query()->where('transaction_id',$this->Authority)->first();
+        $this->order = Order::query()->where('transaction_id',$this->Authority)->first();
         if($this->Status==="OK"){
-            $order->update([
+            $this->order->update([
                 'status'=>OrderStatus::Successful->value
             ]);
         }else{
-            $order->update([
+            $this->order->update([
                 'status'=>OrderStatus::Failed->value
             ]);
         }
-        dd('here');
     }
 
+    #[Layout('homepage::layouts.master'),Title('صفحه نتیجه پرداخت')]
     public function render():View
     {
         return view('payment::livewire.payment-callback');
