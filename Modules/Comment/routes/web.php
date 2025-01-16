@@ -15,7 +15,7 @@ use Modules\Comment\Livewire\CourseComments;
 |
 */
 
-Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+Route::group(['middleware' => ['auth','admin'],'prefix' => 'panel'], function () {
     Route::get('course_comments', CourseComments::class)->name('panel.course.comments');
 
 });

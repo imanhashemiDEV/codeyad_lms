@@ -14,6 +14,6 @@ use Modules\Panel\Http\Controllers\PanelController;
 |
 */
 
-Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+Route::group(['middleware' => ['auth','admin'],'prefix' => 'panel'], function () {
     Route::get('/', \Modules\Panel\Livewire\Index::class)->name('panel.index');
 });

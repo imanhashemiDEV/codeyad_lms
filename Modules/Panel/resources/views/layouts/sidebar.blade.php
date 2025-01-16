@@ -14,43 +14,51 @@
             <!-- Sidebar menu START -->
             <ul class="navbar-nav flex-column" id="navbar-sidebar">
 
-                <!-- Menu item -->
-                <li class="nav-item">
-                    <a href="{{route('panel.index')}}" class="nav-link active">
-                        <i class="bi bi-house fa-fw me-2"></i>داشبورد</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.categories')}}" class="nav-link active">
-                        <i class="bi bi-basket fa-fw me-2"></i>دسته بندی</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.roles')}}" class="nav-link active">
-                        <i class="bi bi-basket fa-fw me-2"></i>نقش ها</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.permissions')}}" class="nav-link active">
-                        <i class="bi bi-basket fa-fw me-2"></i>مجوز ها</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.users')}}" class="nav-link active">
-                        <i class="bi bi-person fa-fw me-2"></i>کاربر ها</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.courses')}}" class="nav-link active">
-                        <i class="bi bi-person fa-fw me-2"></i>لیست دوره ها</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.teacher_courses')}}" class="nav-link active">
-                        <i class="bi bi-person fa-fw me-2"></i>دوره های مدرس</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.course.comments')}}" class="nav-link active">
-                        <i class="bi bi-person fa-fw me-2"></i>نظرات دوره</a>
-                </li>
-                <li class="nav-item">
-                    <a  href="{{route('panel.coupons')}}" class="nav-link active">
-                        <i class="bi bi-person fa-fw me-2"></i>تخفیفات</a>
-                </li>
+                @if(auth()->user()->hasRole('مدیر کل'))
+                    <p>پنل مدیر</p>
+                    <!-- Menu item -->
+                    <li class="nav-item">
+                        <a href="{{route('panel.index')}}" class="nav-link active">
+                            <i class="bi bi-house fa-fw me-2"></i>داشبورد</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{route('panel.categories')}}" class="nav-link active">
+                            <i class="bi bi-basket fa-fw me-2"></i>دسته بندی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{route('panel.roles')}}" class="nav-link active">
+                            <i class="bi bi-basket fa-fw me-2"></i>نقش ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{route('panel.permissions')}}" class="nav-link active">
+                            <i class="bi bi-basket fa-fw me-2"></i>مجوز ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{route('panel.users')}}" class="nav-link active">
+                            <i class="bi bi-person fa-fw me-2"></i>کاربر ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{route('panel.courses')}}" class="nav-link active">
+                            <i class="bi bi-person fa-fw me-2"></i>لیست دوره ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{route('panel.course.comments')}}" class="nav-link active">
+                            <i class="bi bi-person fa-fw me-2"></i>نظرات دوره</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="{{route('panel.coupons')}}" class="nav-link active">
+                            <i class="bi bi-person fa-fw me-2"></i>تخفیفات</a>
+                    </li>
+                @endif
+
+                @if(auth()->user()->hasRole('مدرس'))
+                        <hr>
+                        <p>پنل مدرس</p>
+                        <li class="nav-item">
+                            <a  href="{{route('panel.teacher_courses')}}" class="nav-link active">
+                                <i class="bi bi-person fa-fw me-2"></i>دوره های مدرس</a>
+                        </li>
+                @endif
 
             </ul>
             <!-- Sidebar menu end -->

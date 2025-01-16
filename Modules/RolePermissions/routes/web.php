@@ -13,7 +13,7 @@ use Modules\RolePermissions\Http\Controllers\RolePermissionsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+Route::group(['middleware' => ['auth','admin'],'prefix' => 'panel'], function () {
     Route::get('roles', \Modules\RolePermissions\Livewire\Roles::class)->name('panel.roles');
     Route::get('permissions', \Modules\RolePermissions\Livewire\Permissions::class)->name('panel.permissions');
 });

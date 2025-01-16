@@ -15,7 +15,7 @@ use Modules\Coupon\Livewire\Coupons;
 |
 */
 
-Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+Route::group(['middleware' => ['auth','admin'],'prefix' => 'panel'], function () {
     Route::get('coupons', Coupons::class)->name('panel.coupons');
 
 });

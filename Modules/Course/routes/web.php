@@ -15,7 +15,7 @@ use Modules\Course\Http\Controllers\CourseController;
 */
 
 
-Route::group(['middleware' => ['auth'],'prefix' => 'panel'], function () {
+Route::group(['middleware' => ['auth','admin'],'prefix' => 'panel'], function () {
     Route::get('courses', \Modules\Course\Livewire\Courses::class)->name('panel.courses');
     Route::get('teacher_courses', \Modules\Course\Livewire\TeacherCourses::class)->name('panel.teacher_courses');
     Route::get('add_courses', \Modules\Course\Livewire\AddCourse::class)->name('panel.add_course');
