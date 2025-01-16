@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Transaction\Http\Controllers\TransactionController;
+use Modules\Transaction\Livewire\TeacherTransactions;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,6 @@ use Modules\Transaction\Http\Controllers\TransactionController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('transaction', TransactionController::class)->names('transaction');
+Route::group(['middleware' => ['auth','admin'],'prefix' => 'panel'], function () {
+    Route::get('teacher_transactions', TeacherTransactions::class)->name('panel.teacher.transactions');
 });

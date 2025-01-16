@@ -58,6 +58,10 @@
                             <a  href="{{route('panel.teacher_courses')}}" class="nav-link active">
                                 <i class="bi bi-person fa-fw me-2"></i>دوره های مدرس</a>
                         </li>
+                        <li class="nav-item">
+                            <a  href="{{route('panel.teacher.transactions')}}" class="nav-link active">
+                                <i class="bi bi-person fa-fw me-2"></i>تراکنش های مدرس</a>
+                        </li>
                 @endif
 
             </ul>
