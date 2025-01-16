@@ -31,7 +31,17 @@ class StudentCourse extends Model
         return $this->belongsTo(Course::class);
     }
 
-    protected static function newFactory(): StudentCourseFactory
+    public static function setStudentCourse($order)
+    {
+        foreach ($order->orderDetails as $detail){
+            StudentCourse::query()->create([
+                'user_id'=> $order->user_id,
+                'course_id'=>$detail->course_id
+            ]);
+        }
+    }
+
+    protected static function newFactory()
     {
         //return StudentCourseFactory::new();
     }

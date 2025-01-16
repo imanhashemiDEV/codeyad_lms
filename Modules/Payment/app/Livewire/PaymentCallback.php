@@ -40,29 +40,22 @@ class PaymentCallback extends Component
                 ]);
 
                 // step 2 set student course
-                foreach ($this->order->orderDetails as $detail){
-                    StudentCourse::query()->create([
-                        'user_id'=> $this->order->user_id,
-                        'course_id'=>$detail->course_id
-                    ]);
-                }
+                StudentCourse::setStudentCourse($this->order);
 
                 // step 3 set transactions
-
                 StudentTransactions::query()->create([
                     'user_id'=> $this->order->user_id,
                     'amount'=> $this->order->total_price - $this->order->discount,
-                    'description'=> " پرداخت برای خرید سفارش $this->order->order_code ",
+                    'description'=> " پرداخت برای خرید سفارش {$this->order->order_code }",
                     'transaction_type'=>TransactionType::Pay->value
                 ]);
-
 
 
                 foreach ($this->order->orderDetails as $detail){
                     TeacherTransactions::query()->create([
                         'user_id'=> $detail->course->user_id,
                         'amount'=>$detail->price,
-                        'description'=> " پرداخت برای خرید دوره $detail->course->title ",
+                        'description'=> " پرداخت برای خرید دوره {$detail->course->title} ",
                         'transaction_type'=>TransactionType::Receive->value
                     ]);
 
@@ -70,7 +63,7 @@ class PaymentCallback extends Component
                         TeacherTransactions::query()->create([
                             'user_id'=> $detail->course->user_id,
                             'amount'=>($detail->price * $detail->discount)/100,
-                            'description'=> "  تخفیف برای خرید دوره $detail->course->title ",
+                            'description'=> "  تخفیف برای خرید دوره {$detail->course->title }",
                             'transaction_type'=>TransactionType::Pay->value
                         ]);
                     }
@@ -80,7 +73,7 @@ class PaymentCallback extends Component
                         TeacherTransactions::query()->create([
                             'user_id'=> $detail->course->user_id,
                             'amount'=> ($detail->course->price * $discount->coupon_percent)/100,
-                            'description'=> "  تخفیف عمومی برای سفارش $this->order->discount_code با کد تخفیف $this->order->order_code ",
+                            'description'=> "  تخفیف عمومی برای سفارش {$this->order->discount_code} با کد تخفیف {$this->order->order_code} ",
                             'transaction_type'=>TransactionType::Pay->value
                         ]);
                     }
@@ -89,19 +82,15 @@ class PaymentCallback extends Component
                     TeacherTransactions::query()->create([
                         'user_id'=> $detail->course->user_id,
                         'amount'=>($detail->course->price * 40)/100,
-                        'description'=> " پرداخت کمیسیون برای فروش دوره $detail->course->title",
+                        'description'=> " پرداخت کمیسیون برای فروش دوره {$detail->course->title}",
                         'transaction_type'=>TransactionType::Pay->value
                     ]);
-
                 }
 
-
-
-
-
-
+                DB::commit();
 
             }catch (\Exception $exception){
+                DB::rollBack();
                 Log::error($exception->getMessage());
             }
 
