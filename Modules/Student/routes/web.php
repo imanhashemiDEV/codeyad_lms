@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Student\Http\Controllers\StudentController;
+use Modules\Student\Livewire\StudentDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,6 @@ use Modules\Student\Http\Controllers\StudentController;
 */
 
 Route::group([], function () {
-    Route::resource('student', StudentController::class)->names('student');
+    Route::get('/student_dashboard', StudentDashboard::class)->name('student.dashboard');
 });
+
