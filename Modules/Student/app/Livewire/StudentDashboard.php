@@ -22,6 +22,7 @@ class StudentDashboard extends Component
     public function render(): View
     {
         $courses = StudentCourse::query()
+            ->where('user_id', auth()->user()->id)
             ->whereHas('course', function ($q) {
                 $q->where('title', 'like', '%' . $this->search . '%');
             })
