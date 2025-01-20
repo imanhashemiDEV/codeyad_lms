@@ -117,7 +117,10 @@
                         <li><a class="dropdown-item" href="{{route('login')}}"><i class="bi bi-person fa-fw me-2"></i>ورود / ثبت نام</a></li>
                     @endguest
                    @auth
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>پنل کاربری</a></li>
+                        @if(auth()->user()->roles)
+                            <li><a class="dropdown-item" href="{{route('panel.index')}}"><i class="bi bi-gear fa-fw me-2"></i>پنل مدیریت</a></li>
+                        @endif
+                        <li><a class="dropdown-item" href="{{route('student.dashboard')}}"><i class="bi bi-gear fa-fw me-2"></i>پنل کاربری</a></li>
                         <li><a class="dropdown-item bg-danger-soft-hover" href="{{route('user.cart')}}"><i class="bi bi-shop fa-fw me-2"></i>سبد خرید</a></li>
                         <li><a class="dropdown-item bg-danger-soft-hover" href="{{route('logout')}}"><i class="bi bi-power fa-fw me-2"></i>خروج</a></li>
                    @endauth

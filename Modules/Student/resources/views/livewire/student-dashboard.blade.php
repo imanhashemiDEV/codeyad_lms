@@ -79,33 +79,7 @@
                             <button  type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
                         </div>
                         <!-- Offcanvas body -->
-                        <div class="offcanvas-body p-3 p-xl-0">
-                            <div class="bg-dark border rounded-3 p-3 w-100">
-                                <!-- Dashboard menu -->
-                                <div class="list-group list-group-dark list-group-borderless collapse-list">
-                                    <a class="list-group-item active" href="student-dashboard.html"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>داشبورد</a>
-                                    <a class="list-group-item" href="student-subscription.html"><i class="bi bi-card-checklist fa-fw me-2"></i>مدیریت پکیج</a>
-                                    <a class="list-group-item" href="student-course-list.html"><i class="bi bi-basket fa-fw me-2"></i>لیست دوره ها</a>
-                                    <a class="list-group-item" href="student-course-resume.html"><i class="far fa-fw fa-file-alt me-2"></i>توضیحات دوره</a>
-                                    <a class="list-group-item" href="student-quiz.html"><i class="bi bi-question-diamond fa-fw me-2"></i>امتحانات</a>
-                                    <a class="list-group-item" href="student-payment-info.html"><i class="bi bi-credit-card-2-front fa-fw me-2"></i>اطلاعات کارت</a>
-                                    <a class="list-group-item" href="student-bookmark.html"><i class="bi bi-cart-check fa-fw me-2"></i>موردعلاقه ها</a>
-                                    <a class="list-group-item" href="instructor-edit-profile.html"><i class="bi bi-pencil-square fa-fw me-2"></i>ویرایش پروفایل</a>
-                                    <a class="list-group-item" href="instructor-setting.html"><i class="bi bi-gear fa-fw me-2"></i>تنظیمات</a>
-                                    <a class="list-group-item" href="instructor-delete-account.html"><i class="bi bi-trash fa-fw me-2"></i>حذف پروفایل</a>
-                                    <a class="list-group-item text-danger bg-danger-soft-hover" href="#"><i class="fas fa-sign-out-alt fa-fw me-2"></i>خروج</a>
-                                    <!-- Collapse menu -->
-                                    <a class="list-group-item" data-bs-toggle="collapse" href="#collapseauthentication" role="button" aria-expanded="false" aria-controls="collapseauthentication">
-                                        <i class="bi bi-lock fa-fw me-2"></i>زیر منو
-                                    </a>
-                                    <!-- Submenu -->
-                                    <ul class="nav collapse flex-column" id="collapseauthentication" data-bs-parent="#navbar-sidebar">
-                                        <li class="nav-item"> <a class="nav-link" href="#">عنوان 1</a></li>
-                                        <li class="nav-item"> <a class="nav-link" href="#">عنوان 2</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        @include('student::layouts.student_menus')
                     </div>
                     <!-- Responsive offcanvas body END -->
                 </div>
@@ -121,8 +95,8 @@
                             <div class="d-flex justify-content-center align-items-center p-4 bg-orange bg-opacity-15 rounded-3">
                                 <span class="display-6 lh-1 text-orange mb-0"><i class="fas fa-tv fa-fw"></i></span>
                                 <div class="ms-4">
-                                    <div class="d-flex">
-                                        <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="9"	data-purecounter-delay="200">0</h5>
+                                    <div wire:ignore class="d-flex">
+                                        <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="{{count($courses)}}"	data-purecounter-delay="200">0</h5>
                                     </div>
                                     <p class="mb-0 h6 fw-light">دوره ها</p>
                                 </div>
@@ -170,7 +144,7 @@
                                 <!-- Content -->
                                 <div class="col-md-8">
                                     <form class="rounded position-relative">
-                                        <input class="form-control pe-5 bg-transparent" type="search" placeholder="جستجوی دوره" aria-label="Search">
+                                        <input wire:model.live.debounce.1000="search" class="form-control pe-5 bg-transparent" type="search" placeholder="جستجوی دوره" aria-label="Search">
                                         <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
                                             <i class="fas fa-search fs-6 "></i>
                                         </button>
@@ -181,12 +155,10 @@
                                 <div class="col-md-3">
                                     <!-- Short by filter -->
                                     <form>
-                                        <select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm">
-                                            <option value="">مرتب سازی</option>
-                                            <option>رایگان</option>
-                                            <option>جدیدترین</option>
-                                            <option>پربازدیدترین</option>
-                                            <option>پرفروش ترین</option>
+                                        <select wire:model="sort" wire:change="$refresh" class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm">
+                                            <option>مرتب سازی</option>
+                                            <option value="most_viewed">پربازدیدترین</option>
+                                            <option value="most_sold">پرفروش ترین</option>
                                         </select>
                                     </form>
                                 </div>
@@ -218,19 +190,7 @@
                                                  <div class="d-flex align-items-center">
                                                      <!-- Image -->
                                                      <div class="w-100px">
-                                                         <img src="assets/images/courses/4by3/08.jpg" class="rounded" alt="">
-                                                     </div>
-                                                     <div class="mb-0 ms-2">
-                                                         <!-- Title -->
-                                                         <h6 class="fw-normal"><a href="#">دوره جامع آموزش Sketch</a></h6>
-                                                         <!-- Info -->
-                                                         <div class="overflow-hidden">
-                                                             <h6 class="mb-0 text-end">85%</h6>
-                                                             <div class="progress progress-sm bg-primary bg-opacity-10">
-                                                                 <div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-left" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                                                 </div>
-                                                             </div>
-                                                         </div>
+                                                         <img src="{{url('images/courses/'.$student_course->course_id.'/'. $student_course->course->image)}}" class="rounded" alt="">
                                                      </div>
                                                  </div>
                                              </td>
@@ -251,19 +211,8 @@
                             <!-- Course list table END -->
 
                             <!-- Pagination START -->
-                            <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
-                                <!-- Content -->
-                                <p class="mb-0 text-center text-sm-start">نمایش 1 تا 8 از 20</p>
-                                <!-- Pagination -->
-                                <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-                                    <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                                        <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-right"></i></a></li>
-                                        <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-left"></i></a></li>
-                                    </ul>
-                                </nav>
+                            <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3 justify-content-center">
+                                {{$courses->links('homepage::layouts.pagination')}}
                             </div>
                             <!-- Pagination END -->
                         </div>
