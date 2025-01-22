@@ -17,6 +17,7 @@ use Modules\Comment\app\Enums\CourseCommentStatus;
 use Modules\Comment\Models\CourseComment;
 use Modules\Comment\Models\UserCommentVote;
 use Modules\Course\Models\Course;
+use Modules\Student\Models\StudentCourse;
 
 class CourseDetails extends Component
 {
@@ -28,6 +29,23 @@ class CourseDetails extends Component
     public $text;
     #[Validate('required')]
     public $stars;
+    public $is_buyer=false;
+
+    public function mount()
+    {
+        if(auth()->user() && StudentCourse::query()->where('user_id', auth()->user()->id)
+                ->where('course_id', $this->course->id)->exists()) {
+                $this->is_buyer=true;
+            }
+    }
+
+    public function download($season_id, $video)
+    {
+       $course_id =  $this->course->id;
+        return response()->download(
+           "videos/courses/$course_id/$season_id/$video"
+        );
+    }
 
     public function saveComment(): void
     {

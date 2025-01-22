@@ -19,12 +19,12 @@ class CourseDetail extends Component
     public $course_id,$title,$season_id,$attachment,
         $lesson_title,$lesson_e_title,$video,$is_free;
 
-    public function mount($course_id)
+    public function mount($course_id): void
     {
         $this->course_id = $course_id;
     }
 
-    public function addSeason()
+    public function addSeason(): void
     {
         $this->validate([
             'title'=>'required'
@@ -51,7 +51,7 @@ class CourseDetail extends Component
 
     }
 
-    public function AddLesson()
+    public function AddLesson(): void
     {
         $this->validate([
             'lesson_title'=> 'required',

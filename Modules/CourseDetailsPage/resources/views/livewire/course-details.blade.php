@@ -133,7 +133,13 @@
                                                                     <span
                                                                         class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-100px w-sm-200px w-md-400px">{{$lesson->title}}</span>
                                                                 </div>
-                                                                <p class="mb-0">2دقیقه</p>
+                                                                <div>
+                                                                    @if($is_buyer)
+                                                                        <a href="#" wire:click="download( '{{$season->id}}' , '{{$lesson->video}}' )" class="fa fa-download text-success"></a>
+                                                                    @else
+                                                                        <a href="#" class="fa fa-lock text-danger m-2"></a>
+                                                                    @endif
+                                                                </div>
                                                             </div>
 
                                                             <hr> <!-- Divider -->
